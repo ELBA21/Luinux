@@ -6,5 +6,5 @@ class Sucursal:
     def get_nombre(self, nombre):
         return self.nombre
 
-    def __set_nombre__(self, nombre):
+    def set_nombre(self, nombre):
         self.nombre = nombre

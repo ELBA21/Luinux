@@ -5,21 +5,21 @@ class Productos:
         self.precio = precio
     
     #Getters
-    def __get_nombre__(self):
+    def get_nombre(self):
         return self.nombre
 
-    def __get_id__(self):
+    def get_id(self):
         return self.id
 
-    def __get_precio__(self):
+    def get_precio(self):
         return self.precio
     
     #Setters
-    def __set_nombre__(self, nombre):
+    def set_nombre(self, nombre):
         self.nombre = nombre
 
-    def __set_id__(self, id):
+    def set_id(self, id):
         self.id = id
 
-    def __set_precio__(self, precio):
+    def set_precio(self, precio):
         self.precio = precio     
