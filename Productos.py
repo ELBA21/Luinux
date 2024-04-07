@@ -1,8 +1,9 @@
 class Productos:
-    def __init__(self, nombre, id, precio):
+    def __init__(self, nombre, id, precio, cantidad):
         self.nombre = nombre
         self.id = id
         self.precio = precio
+        self.cantidad = cantidad
     
     #Getters
     def get_nombre(self):
@@ -14,6 +15,9 @@ class Productos:
     def get_precio(self):
         return self.precio
     
+    def get_cantidad(self):
+        return self.get_cantidad
+    
     #Setters
     def set_nombre(self, nombre):
         self.nombre = nombre
@@ -23,3 +27,5 @@ class Productos:
 
     def set_precio(self, precio):
         self.precio = precio     
+    def set_cantidad(self, cantidad):
+        self.get_cantidad = cantidad
