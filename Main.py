@@ -21,6 +21,7 @@ root = Tk()
 
 root.title("Inventario") 
 root.iconbitmap("0_Ico.ico")
+root.iconbitmap("0_Ico.ico") #no me esta funcando
 root.geometry("720x480") #Tamaño estándar de la ventana 
 
 lbl_usuario = Label(root, text="Usuario") #Las siguientes dos líneas mostrar texto
