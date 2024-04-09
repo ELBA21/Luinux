@@ -10,7 +10,10 @@ class Usuario:
 
     def get_sucursales(self):
         return self.sucursales
-    ## no voy a haceer un getter pa la password porque no suena seguro
+    
+    def get_password(sefl):
+        return self.password
+        
     def set_nombre_usuario(self, nombre_usuario):
         self.nombre_usuario = nombre_usuario
 
