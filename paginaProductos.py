@@ -1,10 +1,10 @@
 from tkinter import *
 class testeoProducto:
-    def __init__(self, nombre, id, precio, cantidad):
+    def __init__(self, nombre, id, precio, stock):
         self.nombre = nombre
         self.id = id
         self.precio = precio
-        self.cantidad = cantidad
+        self.stock = stock
 def cargarProductos():
         arrayDeTesteo = [
             testeoProducto("Ramen: Rojo","01",790,4),
@@ -47,11 +47,11 @@ listaDeProductos = cargarProductos()
 def SelecProducto(event):
         i =lista.curselection()[0]
         producto = listaDeProductos[i]
-        print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio}, Cantidad: {producto.cantidad} ")
+        print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio}, Stock: {producto.stock} ")
         labelNombre.config(text=f"Nombre: {producto.nombre}")
         labelId.config(text=f"Nombre: {producto.id}")
         labelPrecio.config(text=f"Nombre: {producto.precio}")
-        labelCantidad.config(text=f"Nombre: {producto.cantidad}")
+        labelCantidad.config(text=f"Nombre: {producto.stock}")
 
 #===========================================
 for producto in listaDeProductos:
