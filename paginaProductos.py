@@ -2,6 +2,10 @@ from tkinter import *
 from Productos import Productos
 from Sucursal import Sucursal
 ##Cosas temporales
+
+global global_a 
+global_a = False
+
 surcursal_provisoria = Sucursal(1)
 surcursal_provisoria.productos = []
 print("Cuantos productos quieres agregar?")
@@ -11,9 +15,13 @@ for i in range(cant):
        testprecio=int(input())
        testcant=int(input())
        surcursal_provisoria.agregar_productos(testnombre,testprecio,testcant)
+       surcursal_provisoria.get_productos(i).set_autoid()
+       
 
 
-
+def Selec_producto_elim(valor):
+       surcursal_provisoria.eleminar_productos(valor)
+       print("producto " + str(valor) + " eliminado")
 
 def testeoDeBotones():
        print("HOLA ESTOY SIENDO TESTEADO :3 NYA")
@@ -47,8 +55,9 @@ botonAgregar = Button(mallaDeBotones, text="Agregar")
 botonAgregar.grid(row=0,column=0)
 botonEditar = Button(mallaDeBotones, text="Editar")
 botonEditar.grid(row=0, column=1)
-BotonEliminar = Button(mallaDeBotones, text="Eliminar")
+BotonEliminar = Button(mallaDeBotones, text="Eliminar", command= Selec_producto_elim(i))
 BotonEliminar.grid(row=0, column=2)
+
 #=======================================
 
 #===================Labels De Informacion
@@ -80,6 +89,8 @@ def SelecProducto(event):
         labelId.config(text=f"Id del Producto: {producto.id}")
         labelPrecio.config(text=f"Precio del Producto: {producto.precio}")
         labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+
+        
 
 #===========================================
 for producto in surcursal_provisoria.productos:

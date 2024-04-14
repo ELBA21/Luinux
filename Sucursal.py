@@ -18,3 +18,6 @@ class Sucursal:
 
     def get_productos(self, value):
         return self.productos[value]
+
+    def eleminar_productos(self, value):
+        self.productos.pop(value)
