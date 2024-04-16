@@ -11,8 +11,11 @@ surcursal_provisoria.productos = []
 print("Cuantos productos quieres agregar?")
 cant = int(input())
 for i in range(cant):
+       print("Nombre de su producto")
        testnombre=input()
+       print("Precio de su producto")
        testprecio=int(input())
+       print("Cantidad de su producto")
        testcant=int(input())
        surcursal_provisoria.agregar_productos(testnombre,testprecio,testcant)
        surcursal_provisoria.get_productos(i).set_autoid()
