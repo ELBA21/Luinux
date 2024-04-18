@@ -13,12 +13,15 @@ cant = int(input())
 for i in range(cant):
        print("Nombre de su producto")
        testnombre=input()
-       print("Precio de su producto")
+       print("Precio de venta de su producto")
        testprecio=int(input())
+       print("Precio de compra de su producto")
+       test_precio_compra=int(input())
        print("Cantidad de su producto")
        testcant=int(input())
-       surcursal_provisoria.agregar_productos(testnombre,testprecio,testcant)
-       surcursal_provisoria.get_productos(i).set_autoid()
+       surcursal_provisoria.agregar_productos(testnombre,testprecio, test_precio_compra, testcant)
+       #if surcursal_provisoria.return_tamano() == i:
+           #   surcursal_provisoria.get_productos(i).set_autoid()
        
 
 
@@ -58,7 +61,7 @@ botonAgregar = Button(mallaDeBotones, text="Agregar")
 botonAgregar.grid(row=0,column=0)
 botonEditar = Button(mallaDeBotones, text="Editar")
 botonEditar.grid(row=0, column=1)
-BotonEliminar = Button(mallaDeBotones, text="Eliminar", command= Selec_producto_elim(i))
+BotonEliminar = Button(mallaDeBotones, text="Eliminar")
 BotonEliminar.grid(row=0, column=2)
 
 #=======================================
