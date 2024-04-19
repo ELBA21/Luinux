@@ -10,7 +10,7 @@ surcursal_provisoria = Sucursal(1)
 surcursal_provisoria.productos = []
 print("Cuantos productos quieres agregar?")
 cant = int(input())
-for i in range(cant):
+for i in range(cant): #alguien mas arregle esto porque yo me canse :( -Nuro]     
        print("Nombre de su producto")
        testnombre=input()
        print("Precio de venta de su producto")
@@ -19,10 +19,9 @@ for i in range(cant):
        test_precio_compra=int(input())
        print("Cantidad de su producto")
        testcant=int(input())
-       surcursal_provisoria.agregar_productos(testnombre,testprecio, test_precio_compra, testcant)
-       #if surcursal_provisoria.return_tamano() == i:
-           #   surcursal_provisoria.get_productos(i).set_autoid()
-       
+       print("\n")
+       surcursal_provisoria.agregar_productos(testnombre, testprecio, test_precio_compra, testcant)
+       surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
 
 
 def Selec_producto_elim(valor):
@@ -90,10 +89,10 @@ labelCantidad.grid(row=9, column=0)
 def SelecProducto(event):
         i =listBoxProductos.curselection()[0]
         producto = surcursal_provisoria.productos[i]
-        print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio}, Stock: {producto.stock} ")
+        print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
         labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
         labelId.config(text=f"Id del Producto: {producto.id}")
-        labelPrecio.config(text=f"Precio del Producto: {producto.precio}")
+        labelPrecio.config(text=f"Precio del Producto: {producto.precio_venta}")
         labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
 
         

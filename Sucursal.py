@@ -18,6 +18,7 @@ class Sucursal:
                 print("precio costo")
                 precio_final = ((producto.get_stock()*producto.get_precio_venta())+(stock_producto*precio_compra_producto))/(producto.get_stock()+stock_producto)
                 producto.set_precio_venta(int(precio_final))
+                producto.actualizar_stock(stock_producto)
                 x = True
         if x == False:
             globals()[str(nombre_producto) + "_objeto"] = Productos(nombre_producto, None, precio_producto, precio_compra_producto, stock_producto)
@@ -31,5 +32,5 @@ class Sucursal:
     def eleminar_productos(self, value):
         self.productos.pop(value)
 
-    def return_tamano(self):
+    def get_tamano(self):
         return len(self.productos)
