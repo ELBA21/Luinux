@@ -11,7 +11,7 @@ class Usuario:
     def get_sucursales(self):
         return self.sucursales
     
-    def get_password(sefl):
+    def get_password(self):
         return self.password
         
     def set_nombre_usuario(self, nombre_usuario):

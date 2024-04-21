@@ -1,6 +1,7 @@
 from tkinter import *
 from Productos import Productos
 from Sucursal import Sucursal
+import Agregar
 ##Cosas temporales
 
 global global_a 
@@ -9,19 +10,20 @@ global_a = False
 surcursal_provisoria = Sucursal(1)
 surcursal_provisoria.productos = []
 print("Cuantos productos quieres agregar?")
-cant = int(input())
-for i in range(cant): #alguien mas arregle esto porque yo me canse :( -Nuro]     
-       print("Nombre de su producto")
-       testnombre=input()
-       print("Precio de venta de su producto")
-       testprecio=int(input())
-       print("Precio de compra de su producto")
-       test_precio_compra=int(input())
-       print("Cantidad de su producto")
-       testcant=int(input())
-       print("\n")
-       surcursal_provisoria.agregar_productos(testnombre, testprecio, test_precio_compra, testcant)
-       surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
+#cant = int(input())
+#for i in range(cant): #alguien mas arregle esto porque yo me canse :( -Nuro]     
+#       print("Nombre de su producto")
+#       testnombre=input()
+#       print("Precio de venta de su producto")
+#       testprecio=int(input())
+#       print("Precio de compra de su producto")
+#       test_precio_compra=int(input())
+#       print("Cantidad de su producto")
+#       testcant=int(input())
+#       print("\n")
+#       surcursal_provisoria.agregar_productos(testnombre, testprecio, test_precio_compra, testcant)
+#       surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
+
 
 
 def Selec_producto_elim(valor):
@@ -36,6 +38,14 @@ def testeoDeBotones():
 ventana = Tk()
 ventana.title("Lista de Productos")
 #====================================
+
+#=========================Metodo para botones
+ventanaAbierta = False
+def abrirAgregar():
+       Agregar.abrirAgregar(ventana, surcursal_provisoria, listBoxProductos)
+       
+
+
 
 #=======================Malla para organizar
 mallaPrincipal = Frame(ventana, bd=2,relief="ridge")
@@ -56,7 +66,7 @@ listBoxProductos.grid(row=0, column=0)
 #==============================Botones
 mallaDeBotones = Frame(mallaPrincipal, bd=2, relief="ridge")
 mallaDeBotones.grid(row=1, column=0)
-botonAgregar = Button(mallaDeBotones, text="Agregar")
+botonAgregar = Button(mallaDeBotones, text="Agregar", command=abrirAgregar)
 botonAgregar.grid(row=0,column=0)
 botonEditar = Button(mallaDeBotones, text="Editar")
 botonEditar.grid(row=0, column=1)
