@@ -51,9 +51,11 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
         cantidad = int(textBoxCantidad.get())
         precioCompra = int(textBoxPrecioCompra.get())
         precioVenta = int(textBoxPrecioVenta.get())
+        testcant = surcursal_provisoria.get_tamano()
         surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad)
-        surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
-        listBoxProductos.insert(END, nombre)
+        if testcant < surcursal_provisoria.get_tamano():
+            surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
+            listBoxProductos.insert(END, nombre)
         cerrarAgregar()
     botonAgregar = Button(mallaPrincipal, text="Aceptar", command=agregarProductos)
     botonAgregar.grid(row=5,column=5)
