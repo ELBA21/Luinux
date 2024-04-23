@@ -72,6 +72,8 @@ botonEditar = Button(mallaDeBotones, text="Editar")
 botonEditar.grid(row=0, column=1)
 BotonEliminar = Button(mallaDeBotones, text="Eliminar")
 BotonEliminar.grid(row=0, column=2)
+BotonVender = Button(mallaDeBotones, text="Vender")
+BotonVender.grid(row=0, column=3)
 
 #=======================================
 
