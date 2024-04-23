@@ -13,14 +13,14 @@ class Sucursal:
 
     def agregar_productos(self, nombre_producto, precio_producto, precio_compra_producto, stock_producto):
         x = False
-        for producto in self.productos:
+        for producto in self.productos: #este for es para que no se cree un segundo objeto con el mismo nombre 
             if producto.get_nombre() == nombre_producto:
                 print("precio costo")
                 precio_final = ((producto.get_stock()*producto.get_precio_venta())+(stock_producto*precio_compra_producto))/(producto.get_stock()+stock_producto)
                 producto.set_precio_venta(int(precio_final))
                 producto.actualizar_stock(stock_producto)
-                x = True
-        if x == False:
+                x = True # si x es verdadera no se creara un objeto y se aplicara la funcion del precio
+        if x == False: # si x sigue siendo false se creara un objeto
             globals()[str(nombre_producto) + "_objeto"] = Productos(nombre_producto, None, precio_producto, precio_compra_producto, stock_producto)
             globals()[str(nombre_producto) + "_objeto"].set_autoid
             self.productos.append(globals()[str(nombre_producto) + "_objeto"])
@@ -32,5 +32,5 @@ class Sucursal:
     def eleminar_productos(self, value):
         self.productos.pop(value)
 
-    def get_tamano(self):
+    def get_tamano(self): #retorna el tamano de la lista
         return len(self.productos)
