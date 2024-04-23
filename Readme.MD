@@ -1,3 +1,3 @@
 Andres pollo dos commits ponte vio
 
-tengo que reescribir como funciona el array de objetos
+NO VOY A REESCRIBIR EL ARRAY 
