@@ -19,7 +19,7 @@ class Productos:
     def get_precio_venta(self):
         return self.precio_venta
 
-    def get_precio_comppra(self):
+    def get_precio_compra(self):
         return self.precio_compra
 
     def get_stock(self):

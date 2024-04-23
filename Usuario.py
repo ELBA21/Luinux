@@ -1,7 +1,7 @@
 class Usuario:
-    def __init__(self, nombre_usuario, sucursales, password):
+    def __init__(self, nombre_usuario, password):
         self.nombre_usuario = nombre_usuario
-        self.sucursales = sucursales
+        self.sucursales = []
         self.password = password
     ## getters y setters nya
     ## leo eri pollo 2 commits
