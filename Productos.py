@@ -41,7 +41,7 @@ class Productos:
     def set_stock(self, stock):
         self.stock = stock
 
-    def set_autoid(self): #crea una id "unica" para cada objeto basado en su precio y nombre (4 ints para el nombre y dos chars para el precio)
+    def set_autoid(self): #crea una id "unica" para cada objeto basado en su nombre (4 ints y dos chars mayusculas)
         random.seed(self.nombre)
         a = random.randint(1000, 9999)
         # random.seed(self.precio) # como el precio puede cambiar decidi hacer que el id solo tenga de semilla el nombre

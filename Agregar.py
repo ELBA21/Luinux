@@ -53,7 +53,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
         precioVenta = int(textBoxPrecioVenta.get())
         testcant = surcursal_provisoria.get_tamano()
         surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad)
-        if testcant < surcursal_provisoria.get_tamano():
+        if testcant < surcursal_provisoria.get_tamano(): #verifica que no se agregue un objeto dos veces a la lista
             surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
             listBoxProductos.insert(END, nombre)
         cerrarAgregar()
