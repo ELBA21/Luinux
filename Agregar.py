@@ -4,7 +4,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     agregar = Toplevel(principalProductos)
     agregar.title("Agregar Producto")
     agregar.focus()
-    agregar.geometry("500x500")
+    agregar.geometry("400x200")
 
     def cerrarAgregar():
         agregar.destroy()
