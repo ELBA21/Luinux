@@ -2,20 +2,53 @@ from tkinter import *
 
 root = Tk()
 
-root.geometry("720x480")
+root.geometry("480x480")
 root.title("Sucursales")
 
 # Función de agregar (en proceso)
 def agregar():
-    print("Agregar")
+    top1 = Toplevel()
+    top1.geometry("360x240")
+    top1.title("Agregar sucursal")
+
+    frame1_agregar = Frame(top1)
+    frame1_agregar.pack(pady=10)
+    frame2_agregar = Frame(top1)
+    frame2_agregar.pack(pady=10)
+    frame3_agregar = Frame(top1)
+    frame3_agregar.pack()
+
+    label1_agregar = Label(frame1_agregar, text= "Agregar sucursal", font="Helvetica 15")
+    label1_agregar.pack()
+
+    label2_agregar = Label(frame2_agregar, text= "Nombre")
+    label2_agregar.grid(row=0, column=0, pady=10)
+    nombre_sucursal = Entry(frame2_agregar)
+    nombre_sucursal.grid(row=0, column=1, pady=10)
+
+    btn_agregar = Button(frame3_agregar, text="Crear", bg= "lightgrey")
+    btn_agregar.pack()
+
 
 # Función de modificar (en proceso)
 def modificar():
-    print("Modificar")
+    top2 = Toplevel()
+    top2.geometry("360x240")
+    top2.title("Modificar sucursal")
+    frame1_modificar = Frame(top2)
+    frame1_modificar.pack(pady=10)
+    label_modificar = Label(frame1_modificar, text= "Modificar sucursal", font="Helvetica 15")
+    label_modificar.pack()
 
 # Función de eliminar (en proceso)
 def eliminar():
-    print("Eliminar")
+    top3 = Toplevel()
+    top3.geometry("360x240")
+    top3.title("Eliminar sucursal")
+    frame1_eliminar = Frame(top3)
+    frame1_eliminar.pack(pady=10)
+    label_eliminar = Label(frame1_eliminar, text= "Eliminar sucursal", font="Helvetica 15")
+    label_eliminar.pack()
 
 # Función de ingresar (en proceso)
 def ingresar():
