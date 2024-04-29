@@ -7,7 +7,7 @@ class Sucursal:
         self.nombre = nombre
         self.ventana_sucursal = ventana_sucursal
 
-    def get_nombre(self, nombre):
+    def get_nombre(self):
         return self.nombre
 
     def set_nombre(self, nombre):
@@ -61,11 +61,11 @@ class Sucursal:
             self.productos[id] = Productos(nombre_producto, id, precio_venta, precio_compra, stock_producto)
             
 
-    def get_productos(self, value):
-        return self.productos[value]
+    def eliminar_producto(self, id):
+        self.productos.pop(id)
 
-    def eliminar_productos(self, value):
-        self.productos.pop(value)
+    def get_producto(self, id):
+        return self.productos[id]
 
     def get_tamano(self): #retorna el tamano de la lista
         return len(self.productos)

@@ -4,23 +4,20 @@ class Usuario:
         self.nombre_usuario = nombre_usuario
         self.sucursales = {}
         self.password = password
-        
+
     def get_nombre_usuario(self):
         return self.nombre_usuario
 
-    def get_sucursales(self):
-        return self.sucursales
+    def get_sucursal(self, nombre):
+        return self.sucursales[nombre]
     
     def get_password(self):
         return self.password
-        
-    def set_nombre_usuario(self, nombre_usuario):
-        self.nombre_usuario = nombre_usuario
+    
+    def set_nombre(self, nombre):
+        self.nombre_usuario = nombre
 
-    def set_sucursales(self, sucursales):
-        self.sucursales = sucursales
-
-    def set_password(self, password):
+    def set_password(self, password): 
         self.password = password
     
     def crear_sucursal(self, nombre):
@@ -34,4 +31,10 @@ class Usuario:
             del self.sucursales[nombre]
         else:
             print("No existe ese, chaval")
-        
+
+    def cambiar_nombre_sucursal(self, nuevo_nombre, antiguo_nombre):
+        if nuevo_nombre in self.sucursales:
+            print("Nombre ya registrado")
+        else:
+            self.sucursales[nuevo_nombre] = self.sucursales.pop[antiguo_nombre]
+            self.sucursales[nuevo_nombre].set_nombre(nuevo_nombre)
