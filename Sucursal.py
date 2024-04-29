@@ -56,7 +56,7 @@ class Sucursal:
                 precio_compra_final = ((producto.get_stock()*producto.get_precio_compra())+(stock_producto*precio_compra))/(producto.get_stock()+stock_producto)
                 producto.actualizar_stock(stock_producto)
                 x = True # si x es verdadera no se creara un objeto y se aplicara la funcion del precio
-            break
+                break
         if x == False: # si x sigue siendo false se creara un objeto
             globals()[str(nombre_producto) + "_objeto"] = Productos(nombre_producto, None, precio_venta, precio_compra, stock_producto)
             globals()[str(nombre_producto) + "_objeto"].set_autoid
