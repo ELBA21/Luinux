@@ -1,10 +1,10 @@
+import Sucursal
 class Usuario:
     def __init__(self, nombre_usuario, password):
         self.nombre_usuario = nombre_usuario
-        self.sucursales = []
+        self.sucursales = {}
         self.password = password
-    ## getters y setters nya
-    ## leo eri pollo 2 commits
+        
     def get_nombre_usuario(self):
         return self.nombre_usuario
 
@@ -23,7 +23,15 @@ class Usuario:
     def set_password(self, password):
         self.password = password
     
-    def crear_sucursal(self):
-        print("no hay protected en piton asi que la dejare public por mientras")
+    def crear_sucursal(self, nombre):
+        if nombre in self.sucursales:
+            print("Ya existe una sucursal con ese nombre")
+        else:
+            self.sucursales[nombre] = Sucursal.Sucursal(nombre)
 
-
+    def eliminar_sucursal(self, nombre):
+        if nombre in self.sucursales:
+            del self.sucursales[nombre]
+        else:
+            print("No existe ese, chaval")
+        

@@ -3,7 +3,7 @@ from tkinter import *
 
 class Sucursal:
     def __init__(self, nombre, ventana_sucursal):
-        self.productos = []
+        self.productos = {}
         self.nombre = nombre
         self.ventana_sucursal = ventana_sucursal
 
@@ -14,6 +14,7 @@ class Sucursal:
         self.nombre = nombre
 
     def agregar_productos(self, nombre_producto, precio_venta, precio_compra, stock_producto):
+        id = Productos.generar_id(nombre_producto)
         x = False
         def confirm_ppp():
             confirm_ppp_w = Toplevel(self.ventana_sucursal)
@@ -42,9 +43,8 @@ class Sucursal:
             confirm_ppp_w.wait_window(confirm_ppp_w)
             return b
 
-        for producto in self.productos: #este for es para que no se cree un segundo objeto con el mismo nombre 
-            print(producto.get_nombre() + " obj")
-            if producto.get_nombre() == nombre_producto:
+        for _, producto in self.productos.items(): #este for es para que no se cree un segundo objeto con el mismo nombre 
+            if nombre_producto == producto.nombre_producto:
                 if (producto.get_precio_venta() != precio_compra or producto.get_precio_venta() != precio_venta):
                     print("Promedio precio ponderado")
                     selection = confirm_ppp()
@@ -58,9 +58,7 @@ class Sucursal:
                 x = True # si x es verdadera no se creara un objeto y se aplicara la funcion del precio
                 break
         if x == False: # si x sigue siendo false se creara un objeto
-            globals()[str(nombre_producto) + "_objeto"] = Productos(nombre_producto, None, precio_venta, precio_compra, stock_producto)
-            globals()[str(nombre_producto) + "_objeto"].set_autoid
-            self.productos.append(globals()[str(nombre_producto) + "_objeto"])
+            self.productos[id] = Productos(nombre_producto, id, precio_venta, precio_compra, stock_producto)
             
 
     def get_productos(self, value):
