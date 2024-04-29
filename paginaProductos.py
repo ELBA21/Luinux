@@ -6,14 +6,13 @@ import Editar
 ##Cosas temporales
 
 
-surcursal_provisoria = Sucursal(1)
-surcursal_provisoria.productos = []
-
-
 #===================== Crear la ventana principal
 ventana = Tk()
 ventana.title("Lista de Productos")
 #====================================
+
+surcursal_provisoria = Sucursal(1, ventana)
+surcursal_provisoria.productos = []
 
 #=========================Metodo para botones
 def abrirAgregar():

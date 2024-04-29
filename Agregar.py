@@ -19,7 +19,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     mallaPrincipal.grid(row=0,column=0)
     #=============================================================
         #La distribucion deberia ser asi
-        #Nombre-Cantidad
+        #Nombre-Cantidad 
         #Compra-Venta
     #Agregar Nombre
     labelNombre = Label(mallaPrincipal,text="Nombre:")
@@ -48,6 +48,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
 
     def agregarProductos():
         print("Boton Agregar")
+        agregar.grab_release()
         nombre = textBoxNombre.get()
         cantidad = int(textBoxCantidad.get())
         precioCompra = int(textBoxPrecioCompra.get())
@@ -58,6 +59,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
             surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
             listBoxProductos.insert(END, nombre)
         cerrarAgregar()
+
     botonAgregar = Button(mallaPrincipal, text="Aceptar", command=agregarProductos)
     botonAgregar.grid(row=5,column=5)
     botonCerrar = Button(mallaPrincipal, text= "Cerrar", command=cerrarAgregar)
