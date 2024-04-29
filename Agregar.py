@@ -15,7 +15,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
 
 
     #====================Creo una malla para organizar los temas
-    mallaPrincipal = Frame(agregar, bd=2)
+    mallaPrincipal = Frame(agregar, bd=4)
     mallaPrincipal.grid(row=0,column=0)
     #=============================================================
         #La distribucion deberia ser asi
@@ -59,11 +59,12 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
             surcursal_provisoria.get_productos(surcursal_provisoria.get_tamano()-1).set_autoid()
             listBoxProductos.insert(END, nombre)
         cerrarAgregar()
-
-    botonAgregar = Button(mallaPrincipal, text="Aceptar", command=agregarProductos)
-    botonAgregar.grid(row=5,column=5)
-    botonCerrar = Button(mallaPrincipal, text= "Cerrar", command=cerrarAgregar)
-    botonCerrar.grid(row=5,column=4)
+    malla_botones = Frame(mallaPrincipal, bd=8)
+    malla_botones.grid(row=4, column=1)
+    botonAgregar = Button(malla_botones, text="Aceptar", command=agregarProductos)
+    botonAgregar.grid(row=0,column=0)
+    botonCerrar = Button(malla_botones, text= "Cerrar", command=cerrarAgregar)
+    botonCerrar.grid(row=0,column=1)
     #==============
 
 
