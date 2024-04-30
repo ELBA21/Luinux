@@ -36,5 +36,5 @@ class Usuario:
         if nuevo_nombre in self.sucursales:
             print("Nombre ya registrado")
         else:
-            self.sucursales[nuevo_nombre] = self.sucursales.pop[antiguo_nombre]
+            self.sucursales[nuevo_nombre] = self.sucursales.pop(antiguo_nombre)
             self.sucursales[nuevo_nombre].set_nombre(nuevo_nombre)

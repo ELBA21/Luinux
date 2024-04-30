@@ -16,5 +16,5 @@ class Administrador:
         if nuevo_nombre in self.usuarios:
             print("Es el mismo nombre que ya existe")
         else:
-            self.usuarios[nuevo_nombre] = self.usuarios.pop[antiguo_nombre]
+            self.usuarios[nuevo_nombre] = self.usuarios.pop(antiguo_nombre)
             self.usuarios[nuevo_nombre].set_nombre(nuevo_nombre)
