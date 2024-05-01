@@ -1,3 +1,5 @@
 Andres pollo dos commits ponte vio
 
-NO VOY A REESCRIBIR EL ARRAY 
+Andres weno pal nelson te hechaste todo el codigo
+
+pico rico flaite chile

@@ -39,7 +39,7 @@ class Productos:
         self.stock = stock
 
     def generar_id(nombre): #crea una id "unica" para cada objeto basado en su nombre (4 ints y dos chars mayusculas)
-        random.seed(nombre)
+        random.seed(nombre) #Andres de mierda pq le cambiaste el nombre aqui, podias hacer un .get_id() y no haberte cagado Agregar.py
         a = random.randint(1000, 9999)
         # random.seed(self.precio) # como el precio puede cambiar decidi hacer que el id solo tenga de semilla el nombre
         b = ''.join(random.choices(string.ascii_uppercase, k=2))

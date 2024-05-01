@@ -11,8 +11,8 @@ ventana = Tk()
 ventana.title("Lista de Productos")
 #====================================
 
-surcursal_provisoria = Sucursal(1, ventana)
-surcursal_provisoria.productos = []
+surcursal_provisoria = Sucursal(1)
+surcursal_provisoria.productos = {}
 
 #=========================Metodo para botones
 def abrirAgregar():
@@ -30,7 +30,7 @@ def elemento_selecionado():
 def eliminar_Producto():
        if listBoxProductos.curselection():
               i = listBoxProductos.curselection()[0]
-              surcursal_provisoria.eliminar_productos(i)
+              surcursal_provisoria.eliminar_producto(i)
               listBoxProductos.delete(i)
 
 
@@ -88,18 +88,24 @@ labelCantidad.grid(row=9, column=0)
 
 
 def SelecProducto(event):
-        i =listBoxProductos.curselection()[0]
-        producto = surcursal_provisoria.productos[i]
-        print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
-        labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
-        labelId.config(text=f"Id del Producto: {producto.id}")
-        labelPrecio.config(text=f"Precio del Producto: {producto.precio_venta}")
-        labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+       boolvar = listBoxProductos.curselection()
+       if boolvar:
+              i =listBoxProductos.curselection()[0]
+              producto = surcursal_provisoria.get_producto(i)
+              print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
+              labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
+              labelId.config(text=f"Id del Producto: {producto.id}")
+              labelPrecio.config(text=f"Precio del Producto: {producto.precio_venta}")
+              labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+       else:
+              print("No hay nada seleccionado")
 
-        
+surcursal_provisoria.productos[0] = Productos("Producto 1", 555, 10.0, 5.0, 100)
+surcursal_provisoria.productos[1] = Productos("Producto 2", 2, 20.0, 10.0, 50)
+surcursal_provisoria.productos[2] = Productos("Producto 3", 3, 30.0, 15.0, 200)
 
 #===========================================
-for producto in surcursal_provisoria.productos:
+for key, producto in surcursal_provisoria.productos.items():
       listBoxProductos.insert(END, producto.nombre)
 
 listBoxProductos.bind("<<ListboxSelect>>", SelecProducto)
