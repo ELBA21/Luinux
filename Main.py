@@ -8,7 +8,19 @@ from Productos import *
 
 import json
 
+def guardar(admin):
+    admin_dict = admin.to_dict()
+
+    json_data = json.dumps(admin_dict)
+
+    with open('datos.json', 'w') as archivo:
+        archivo.write(json_data)
+
 admin = Administrador()
+
+def registrarse_action():
+    admin.registrarUsuario(usuario(), contrasenia())
+    guardar(admin)
 
 def loguearse_action(): # usen snake_case po pollos
     if usuario() in admin.usuarios:
@@ -24,9 +36,6 @@ def usuario():
 
 def contrasenia():
     return password_textbox.get()
-
-def registrarse_action():
-    admin.registrarUsuario(usuario(), contrasenia())
 
 
 root = Tk() 
@@ -55,5 +64,6 @@ btn.pack()
 registrarse = Button(root, text="Registrarse", command= registrarse_action)
 registrarse.config(bg="white", fg="black")
 registrarse.pack(side=RIGHT)
+
 
 root.mainloop() #Comienza el loop
