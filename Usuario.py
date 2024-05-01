@@ -38,3 +38,10 @@ class Usuario:
         else:
             self.sucursales[nuevo_nombre] = self.sucursales.pop(antiguo_nombre)
             self.sucursales[nuevo_nombre].set_nombre(nuevo_nombre)
+
+    def to_dict(self):
+        return {
+            "nombre_usuario": self.nombre_usuario,
+            "password": self.password,
+            "sucursales": {sucursal.get_nombre(): sucursal.to_dict() for sucursal in self.sucursales.values()}
+        }

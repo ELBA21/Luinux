@@ -26,7 +26,7 @@ class Sucursal:
                 break
         if x == False: # si x sigue siendo false se creara un objeto
             print("Producto nuevo")
-            self.productos[len(self.productos)] = Productos(nombre_producto, id, precio_venta, precio_compra, stock_producto)
+            self.productos[id] = Productos(nombre_producto, id, precio_venta, precio_compra, stock_producto)
             
 
     def eliminar_producto(self, id):
@@ -38,3 +38,9 @@ class Sucursal:
 
     def get_tamano(self): #retorna el tamano de la lista
         return len(self.productos)
+    
+    def to_dict(self):
+        return {
+            "nombre": self.nombre,
+            "productos": {producto.get_id(): producto.to_dict() for producto in self.productos.values()}
+        }

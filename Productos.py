@@ -47,3 +47,6 @@ class Productos:
 
     def actualizar_stock(self, stock_update): #actualiza sumando y restando al stock existente
         self.stock = self.stock + stock_update
+
+    def to_dict(self):
+        return {'nombre': self.nombre, "id": self.id,'precio_venta': self.precio_venta,'precio_compra': self.precio_compra, "stock": self.stock}

@@ -18,3 +18,8 @@ class Administrador:
         else:
             self.usuarios[nuevo_nombre] = self.usuarios.pop(antiguo_nombre)
             self.usuarios[nuevo_nombre].set_nombre(nuevo_nombre)
+    
+    def to_dict(self):
+        return {
+            "usuarios": {usuario.get_nombre_usuario(): usuario.to_dict() for usuario in self.usuarios.values()}
+        }
