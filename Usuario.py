@@ -1,4 +1,4 @@
-import Sucursal
+from Sucursal import Sucursal
 class Usuario:
     def __init__(self, nombre_usuario, password):
         self.nombre_usuario = nombre_usuario
@@ -24,7 +24,7 @@ class Usuario:
         if nombre in self.sucursales:
             print("Ya existe una sucursal con ese nombre")
         else:
-            self.sucursales[nombre] = Sucursal.Sucursal(nombre)
+            self.sucursales[nombre] = Sucursal(nombre)
 
     def eliminar_sucursal(self, nombre):
         if nombre in self.sucursales:

@@ -1,9 +1,14 @@
+from Usuario import Usuario
+
 class Administrador:
     def __init__(self):
         self.usuarios = {}
 
-    def registrarUsuario(self, usuario):
-        self.usuarios[usuario.nombre_usuario] = usuario
+    def registrarUsuario(self, nombre_usuario, password):
+        if nombre_usuario in self.usuarios:
+            print("Este waxito ya esiste")
+        else:
+            self.usuarios[nombre_usuario] = Usuario(nombre_usuario, password)
 
     def eliminarUsuario(self, usuario):
         del self.usuarios[usuario.nombre_usuario]

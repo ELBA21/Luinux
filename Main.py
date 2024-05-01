@@ -1,20 +1,32 @@
 #En pocas palabras, el código para abrir una ventana (desde "from" hasta ".mainloop()")
 #Librería para la interfaz
 from tkinter import * 
+from Administrador import *
+from Usuario import *
+from Sucursal import *
+from Productos import *
 
-def myFunction(): # usen snake_case po pollos
-    print("Leo pollo")
-    print("usuario: " + get_username())
-    print("contra super secreta: " + get_password())
+import json
 
-def get_username():
+admin = Administrador()
+
+def loguearse_action(): # usen snake_case po pollos
+    if usuario() in admin.usuarios:
+        if contrasenia() == admin.usuarios[usuario()].get_password():
+            print("LOGUEADOOOOOOO PAAAAA")
+        else:
+            print("CONTRA INCORRECTA")
+    else:
+        print("Usuario no encontrado")
+
+def usuario():
     return usuario_textbox.get()
 
-def get_password():
+def contrasenia():
     return password_textbox.get()
 
 def registrarse_action():
-    print("benja weno pal ñacson te tiro to'o el pixi")
+    admin.registrarUsuario(usuario(), contrasenia())
 
 
 root = Tk() 
@@ -36,7 +48,7 @@ lbl_password.pack()
 password_textbox = Entry(root, width=24, show="●") #el show= es para mostrar otro caracter en vez de un caracter real
 password_textbox.pack()
 
-btn = Button(root, text="Iniciar sesion", command= myFunction) #Botón
+btn = Button(root, text="Iniciar sesion", command= loguearse_action) #Botón
 btn.config(bg="white", fg="black") #Dar estilo (también se puede hacer desde Button())
 btn.pack()
 
