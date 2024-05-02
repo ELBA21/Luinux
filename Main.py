@@ -64,30 +64,38 @@ def contrasenia():
 
 root = Tk() 
 
-root.title("Inventario") 
-root.iconbitmap("0_Ico.ico")
-root.iconbitmap("0_Ico.ico") #no me esta funcando
-root.geometry("720x480") #Tamaño estándar de la ventana 
+#==============FRAMES==============
+frame_usuarios = Frame(root)
+frame_usuarios.pack(pady=(80,0))
+frame1_usuarios = Frame(root)
+frame1_usuarios.pack(pady=(45,0))
+frame2_usuarios = Frame(root)
+frame2_usuarios.pack(pady=5)
+#==================================
 
-lbl_usuario = Label(root, text="Usuario") #Las siguientes dos líneas mostrar texto
+root.title("Inventario") 
+root.geometry("480x480") #Tamaño estándar de la ventana 
+
+lbl_iniciar = Label(frame_usuarios, text="INICIAR SESIÓN", font="Helvetica 15")
+lbl_iniciar.pack()
+
+lbl_usuario = Label(frame1_usuarios, text="Usuario", font="Helvetica 11")
 lbl_usuario.pack()
 
-usuario_textbox = Entry(root, width=24) #el entry es como una caja de texto sin salto de linea
-usuario_textbox.pack()
+usuario_textbox = Entry(frame2_usuarios, width=24, borderwidth=1, relief="solid") #el entry es como una caja de texto sin salto de linea
+usuario_textbox.pack(pady=(0,5))
 
-lbl_password = Label(root, text="Contraseña")
+lbl_password = Label(frame2_usuarios, text="Contraseña", font="Helvetica 11")
 lbl_password.pack()
 
-password_textbox = Entry(root, width=24, show="●") #el show= es para mostrar otro caracter en vez de un caracter real
-password_textbox.pack()
+password_textbox = Entry(frame2_usuarios, width=24, show="●", borderwidth=1, relief="solid") #el show= es para mostrar otro caracter en vez de un caracter real
+password_textbox.pack(pady=5)
 
-btn = Button(root, text="Iniciar sesion", command= loguearse_action) #Botón
-btn.config(bg="white", fg="black") #Dar estilo (también se puede hacer desde Button())
-btn.pack()
+btn = Button(frame2_usuarios, text="Iniciar sesion", command= loguearse_action, bg= "lightgrey", borderwidth=1, relief="solid") #Botón
+btn.pack(pady=5)
 
-registrarse = Button(root, text="Registrarse", command= registrarse_action)
-registrarse.config(bg="white", fg="black")
-registrarse.pack(side=RIGHT)
+registrarse = Button(frame2_usuarios, text="Registrarse", command= registrarse_action, bg= "lightgrey", borderwidth=1, relief="solid")
+registrarse.pack()
 
 
 root.mainloop() #Comienza el loop
