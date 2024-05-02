@@ -12,6 +12,9 @@ class Sucursal:
     def set_nombre(self, nombre):
         self.nombre = nombre
 
+    def set_productos(self, productos):
+        self.productos = productos
+
     def agregar_productos(self, nombre_producto, precio_venta, precio_compra, stock_producto):
         id = Productos.generar_id(nombre_producto)
         print(id)
@@ -44,3 +47,8 @@ class Sucursal:
             "nombre": self.nombre,
             "productos": {producto.get_id(): producto.to_dict() for producto in self.productos.values()}
         }
+    
+    def from_dict(dict):
+        sucursal = Sucursal(dict["nombre"])
+        sucursal.set_productos(dict["productos"])
+        return sucursal

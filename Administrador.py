@@ -4,6 +4,9 @@ class Administrador:
     def __init__(self):
         self.usuarios = {}
 
+    def set_usuarios(self, usuarios):
+        self.usuarios = usuarios
+
     def registrarUsuario(self, nombre_usuario, password):
         if nombre_usuario in self.usuarios:
             print("Este waxito ya esiste")
@@ -28,3 +31,8 @@ class Administrador:
         return {
             "usuarios": {usuario.get_nombre_usuario(): usuario.to_dict() for usuario in self.usuarios.values()}
         }
+    
+    def from_dict(dict):
+        admin = Administrador()
+        admin.set_usuarios(dict["sucursales"])
+        return admin

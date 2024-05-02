@@ -20,6 +20,9 @@ class Usuario:
     def set_password(self, password): 
         self.password = password
     
+    def set_sucursales(self, sucursales):
+        self.sucursales = sucursales
+
     def crear_sucursal(self, nombre):
         if nombre in self.sucursales:
             print("Ya existe una sucursal con ese nombre")
@@ -45,3 +48,8 @@ class Usuario:
             "password": self.password,
             "sucursales": {sucursal.get_nombre(): sucursal.to_dict() for sucursal in self.sucursales.values()}
         }
+    
+    def from_dict(dict):
+        usuario = Usuario(dict["nombre_usuario"], dict["password"])
+        Usuario.set_sucursales(dict["sucursales"])
+        return usuario

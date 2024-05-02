@@ -1,3 +1,5 @@
+import os
+
 #En pocas palabras, el código para abrir una ventana (desde "from" hasta ".mainloop()")
 #Librería para la interfaz
 from tkinter import * 
@@ -16,7 +18,29 @@ def guardar(admin):
     with open('datos.json', 'w') as archivo:
         archivo.write(json_data)
 
+def cargar(admin, datos):
+    usuarios = {}
+    for _, usuario_dic in datos["usuarios"].items():
+        usuario = Usuario(usuario_dic["nombre_usuario"], usuario_dic["password"])
+        sucursales = {}
+        for _, sucursal_dic in usuario_dic["sucursales"].items():
+            sucursal = Sucursal(sucursal_dic["nombre"])
+            productos = {}
+            for _, producto_dic in sucursal_dic["productos"].items():
+                producto = Productos.from_dict(producto_dic)
+                productos[producto.get_id()] = producto
+            sucursal.set_productos(productos)
+            sucursales[sucursal.get_nombre()] = sucursal
+        usuario.set_sucursales(sucursales)
+        usuarios[usuario.get_nombre_usuario()] = usuario
+    admin.set_usuarios(usuarios)
+
 admin = Administrador()
+
+if os.path.exists("datos.json"):
+    with open('datos.json', 'r') as archivo:
+        datos = json.load(archivo)
+        cargar(admin, datos)
 
 def registrarse_action():
     admin.registrarUsuario(usuario(), contrasenia())

@@ -50,3 +50,7 @@ class Productos:
 
     def to_dict(self):
         return {'nombre': self.nombre, "id": self.id,'precio_venta': self.precio_venta,'precio_compra': self.precio_compra, "stock": self.stock}
+    
+    def from_dict(dict):
+        return Productos(dict["nombre"], dict["id"], dict["precio_venta"], dict["precio_compra"], dict["stock"])
+    
