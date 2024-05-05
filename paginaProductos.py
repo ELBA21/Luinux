@@ -7,8 +7,9 @@ import Editar
 
 
 #===================== Crear la ventana principal
-ventana = Tk()
-ventana.title("Lista de Productos")
+root = Tk()
+root.geometry("480x480")
+root.title("Lista de Productos")
 #====================================
 
 surcursal_provisoria = Sucursal(1)
@@ -16,10 +17,10 @@ surcursal_provisoria.productos = {}
 
 #=========================Metodo para botones
 def abrirAgregar():
-       Agregar.abrirAgregar(ventana, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
+       Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
                                                                              #Asi evitamos importaciones circulares
 def abrir_Editar():
-       Editar.abrir_Editar(ventana, surcursal_provisoria, listBoxProductos, elemento_selecionado)
+       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, elemento_selecionado)
 
 def elemento_selecionado():
        if listBoxProductos.curselection():
@@ -35,38 +36,46 @@ def eliminar_Producto():
 
 
 #=======================Malla para organizar
-mallaPrincipal = Frame(ventana, bd=2,relief="ridge")
-mallaPrincipal.grid(row=0,column=0)
+frame_0 = Frame(root)
+frame_0.pack()
+frame_listbox = Frame(root)
+frame_listbox.pack(pady=(50,10))
+frame_botones = Frame(root)
+frame_botones.pack()
+frame_1 = Frame(root)
+frame_1.pack()
 #=============================================================
 
 
                 #==========================Elementos de la malla
                 #=======================================
 
+lbl_iniciar = Label(frame_0, text="PRODUCTOS", font="Helvetica 15")
+lbl_iniciar.pack(pady=(70,0))
 #================ListBox=====
-listBoxProductos = Listbox(mallaPrincipal, width=50, height=10)
-listBoxProductos.grid(row=0, column=0)
+listBoxProductos = Listbox(frame_listbox, width=50, height=10, borderwidth=1, relief="solid")
+listBoxProductos.pack()
 #==========================
 
 
 
 #==============================Botones
-mallaDeBotones = Frame(mallaPrincipal, bd=2, relief="ridge")
+mallaDeBotones = Frame(frame_botones, bd=2)
 mallaDeBotones.grid(row=1, column=0)
-botonAgregar = Button(mallaDeBotones, text="Agregar", command=abrirAgregar)
-botonAgregar.grid(row=0,column=0)
-botonEditar = Button(mallaDeBotones, text="Editar", command= abrir_Editar)
-botonEditar.grid(row=0, column=1)
-BotonEliminar = Button(mallaDeBotones, text="Eliminar", command= eliminar_Producto)
-BotonEliminar.grid(row=0, column=2)
-BotonVender = Button(mallaDeBotones, text="Vender")
-BotonVender.grid(row=0, column=3)
+botonAgregar = Button(mallaDeBotones, text="Agregar", command=abrirAgregar, bg= "lightgrey", borderwidth=1, relief="solid")
+botonAgregar.grid(row=0,column=0, padx=4)
+botonEditar = Button(mallaDeBotones, text="Editar", command= abrir_Editar, bg= "lightgrey", borderwidth=1, relief="solid")
+botonEditar.grid(row=0, column=1, padx=4)
+BotonEliminar = Button(mallaDeBotones, text="Eliminar", command= eliminar_Producto, bg= "lightgrey", borderwidth=1, relief="solid")
+BotonEliminar.grid(row=0, column=2, padx=4)
+BotonVender = Button(mallaDeBotones, text="Vender", bg= "lightgrey", borderwidth=1, relief="solid")
+BotonVender.grid(row=0, column=3, padx=4)
 
 #=======================================
 
 #===================Labels De Informacion
-mallaDeLabels = Frame(mallaPrincipal, bd=2, relief="ridge")
-mallaDeLabels.grid(row=2, column=0)
+mallaDeLabels = Frame(frame_1, borderwidth=1, relief="solid")
+mallaDeLabels.grid(row=2, column=0, pady=10)
 
 LabelInformacion = Label(mallaDeLabels,text="Informacion del Producto")
 LabelInformacion.grid(row=5, column=0)
@@ -111,4 +120,4 @@ for key, producto in surcursal_provisoria.productos.items():
 listBoxProductos.bind("<<ListboxSelect>>", SelecProducto)
 
  
-ventana.mainloop()
+root.mainloop()
