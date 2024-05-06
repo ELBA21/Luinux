@@ -10,13 +10,9 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     def cerrarAgregar():
         agregar.destroy()
     
-
-
-
-
     #====================Creo una malla para organizar los temas
     mallaPrincipal = Frame(agregar, bd=4)
-    mallaPrincipal.grid(row=0,column=0)
+    mallaPrincipal.pack()
     #=============================================================
         #La distribucion deberia ser asi
         #Nombre-Cantidad 
@@ -24,25 +20,25 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     #Agregar Nombre
     labelNombre = Label(mallaPrincipal,text="Nombre:")
     labelNombre.grid(row=0,column=0)
-    textBoxNombre = Entry(mallaPrincipal)
+    textBoxNombre = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxNombre.grid(row=1, column=0)
 
     #Cantidad
     labelCantidad = Label(mallaPrincipal, text="Cantidad:")
     labelCantidad.grid(row=0,column=1)
-    textBoxCantidad = Entry(mallaPrincipal)
+    textBoxCantidad = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxCantidad.grid(row=1, column=1)
 
     #Agrebar Precio Compra
     labelPrecioCompra = Label(mallaPrincipal, text="Precio Compra:")
     labelPrecioCompra.grid(row=2, column=0)
-    textBoxPrecioCompra = Entry(mallaPrincipal)
+    textBoxPrecioCompra = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioCompra.grid(row=3, column=0)
 
     #Agregar Precio Venta
-    labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta")
+    labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta:")
     labelPrecioVenta.grid(row=2,column=1)
-    textBoxPrecioVenta = Entry(mallaPrincipal)
+    textBoxPrecioVenta = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioVenta.grid(row=3, column=1)
 
 
@@ -55,11 +51,11 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
         precioVenta = int(textBoxPrecioVenta.get())
         surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad)
         cerrarAgregar()
-    malla_botones = Frame(mallaPrincipal, bd=8)
-    malla_botones.grid(row=4, column=1)
-    botonAgregar = Button(malla_botones, text="Aceptar", command=agregarProductos)
-    botonAgregar.grid(row=0,column=0)
-    botonCerrar = Button(malla_botones, text= "Cerrar", command=cerrarAgregar)
+    malla_botones = Frame(agregar, bd=8)
+    malla_botones.pack()
+    botonAgregar = Button(malla_botones, text="Aceptar", command=agregarProductos, bg= "lightgrey", borderwidth=1, relief="solid")
+    botonAgregar.grid(row=0,column=0, padx=15)
+    botonCerrar = Button(malla_botones, text= "Cerrar", command=cerrarAgregar, bg= "lightgrey", borderwidth=1, relief="solid")
     botonCerrar.grid(row=0,column=1)
     #==============
 
