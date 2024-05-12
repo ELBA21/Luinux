@@ -1,6 +1,7 @@
 from tkinter import *
 from Productos import Productos
 from Sucursal import Sucursal
+from string import *
 import Agregar
 import Editar
 ##Cosas temporales
@@ -18,10 +19,10 @@ surcursal_provisoria.productos = {}
 #=========================Metodo para botones
 def abrirAgregar():
        Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
-                                                                             #Asi evitamos importaciones circulares
+       actualizar_productos()                                            #Asi evitamos importaciones circulares
 def abrir_Editar():
        Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, elemento_selecionado)
-
+       actualizar_productos()
 def elemento_selecionado():
        if listBoxProductos.curselection():
               i = listBoxProductos.curselection()[0]
@@ -33,7 +34,7 @@ def eliminar_Producto():
               i = listBoxProductos.curselection()[0]
               surcursal_provisoria.eliminar_producto(i)
               listBoxProductos.delete(i)
-
+       actualizar_productos()
 
 #=======================Malla para organizar
 frame_0 = Frame(root)
@@ -83,10 +84,12 @@ labelNombre = Label(mallaDeLabels, text="Nombre del Producto:")
 labelNombre.grid(row=6, column=0, padx=100)
 labelId = Label(mallaDeLabels, text="ID del Producto")
 labelId.grid(row=7, column=0)
-labelPrecio = Label(mallaDeLabels, text="Precio del Producto:")
-labelPrecio.grid(row=8, column=0)
+label_precio_compra = Label(mallaDeLabels, text="Precio de Compra:")
+label_precio_compra.grid(row=8, column=0)
+labelPrecio = Label(mallaDeLabels, text="Precio de Venta:")
+labelPrecio.grid(row=9, column=0)
 labelCantidad = Label(mallaDeLabels, text="Cantidad del Producto:")
-labelCantidad.grid(row=9, column=0)
+labelCantidad.grid(row=10, column=0)
 
 #============================================
 
@@ -99,25 +102,26 @@ labelCantidad.grid(row=9, column=0)
 def SelecProducto(event):
        boolvar = listBoxProductos.curselection()
        if boolvar:
-              i =listBoxProductos.curselection()[0]
-              producto = surcursal_provisoria.get_producto(i)
+              i = listBoxProductos.curselection()[0]
+              producto_nombre, id_producto = listBoxProductos.get(i)
+              producto = surcursal_provisoria.get_producto(id_producto)
               print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
               labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
               labelId.config(text=f"Id del Producto: {producto.id}")
-              labelPrecio.config(text=f"Precio del Producto: {producto.precio_venta}")
+              label_precio_compra.config(text=f"Precio de Compra: {producto.precio_compra}")
+              labelPrecio.config(text=f"Precio de Venta: {producto.precio_venta}")
               labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
        else:
               print("No hay nada seleccionado")
 
-surcursal_provisoria.productos[0] = Productos("Producto 1", 555, 10.0, 5.0, 100)
-surcursal_provisoria.productos[1] = Productos("Producto 2", 2, 20.0, 10.0, 50)
-surcursal_provisoria.productos[2] = Productos("Producto 3", 3, 30.0, 15.0, 200)
-
 #===========================================
-for key, producto in surcursal_provisoria.productos.items():
-      listBoxProductos.insert(END, producto.nombre)
+
 
 listBoxProductos.bind("<<ListboxSelect>>", SelecProducto)
+def actualizar_productos():
+       listBoxProductos.delete(0, END)
 
- 
+       for key, producto in surcursal_provisoria.productos.items():
+            listBoxProductos.insert(END, (producto.nombre, producto.id))
+
 root.mainloop()
