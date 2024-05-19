@@ -21,21 +21,17 @@ def abrirAgregar():
        Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
        actualizar_productos()                                            #Asi evitamos importaciones circulares
 def abrir_Editar():
-       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, elemento_selecionado)
-       actualizar_productos()
-def elemento_selecionado():
-       if listBoxProductos.curselection():
-              i = listBoxProductos.curselection()[0]
-              return i
-       else:
-              return -1
-def eliminar_Producto():
-       if listBoxProductos.curselection():
-              i = listBoxProductos.curselection()[0]
-              surcursal_provisoria.eliminar_producto(i)
-              listBoxProductos.delete(i)
+       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto)
        actualizar_productos()
 
+def eliminar_Producto():
+       id_producto = SelecProducto()
+       posicion_producto = listBoxProductos.curselection()
+       if id_producto:
+              surcursal_provisoria.eliminar_producto(id_producto)
+              listBoxProductos.delete(posicion_producto)
+       else:
+              print("No hay elemento seleccionado")
 #=======================Malla para organizar
 frame_0 = Frame(root)
 frame_0.pack()
@@ -99,20 +95,26 @@ labelCantidad.grid(row=10, column=0)
 
 
 
-def SelecProducto(event):
-       boolvar = listBoxProductos.curselection()
-       if boolvar:
-              i = listBoxProductos.curselection()[0]
-              producto_nombre, id_producto = listBoxProductos.get(i)
+def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesariamente tener una entrada.
+       indice = listBoxProductos.curselection()
+       if indice:
+              i = indice[0]
+              string = listBoxProductos.get(i)
+              producto_nombre, id_producto = string.split()
+              
               producto = surcursal_provisoria.get_producto(id_producto)
-              print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
-              labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
-              labelId.config(text=f"Id del Producto: {producto.id}")
-              label_precio_compra.config(text=f"Precio de Compra: {producto.precio_compra}")
-              labelPrecio.config(text=f"Precio de Venta: {producto.precio_venta}")
-              labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+              if producto:
+                     print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
+                     labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
+                     labelId.config(text=f"Id del Producto: {producto.id}")
+                     label_precio_compra.config(text=f"Precio de Compra: {producto.precio_compra}")
+                     labelPrecio.config(text=f"Precio de Venta: {producto.precio_venta}")
+                     labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+                     return id_producto
+              else:
+                     print("No se encuentra")
        else:
-              print("No hay nada seleccionado")
+              print("No hay producto seleccionado")
 
 #===========================================
 
@@ -122,6 +124,8 @@ def actualizar_productos():
        listBoxProductos.delete(0, END)
 
        for key, producto in surcursal_provisoria.productos.items():
-            listBoxProductos.insert(END, (producto.nombre, producto.id))
+            StringUnica = producto.nombre + " " + producto.id 
+            listBoxProductos.insert(END, StringUnica)
+            #Tuve que concatenarlas porque si se colocan por separado abajo cambia de tipo, pasa de ser String a tupla. Y es paja trabajar :p
 
 root.mainloop()

@@ -34,7 +34,7 @@ class Sucursal:
             
 
     def eliminar_producto(self, id):
-        self.productos.pop(id)
+        del self.productos[id]
 
     def get_producto(self, id):
         if id in self.productos:
