@@ -30,13 +30,32 @@ def eliminar_Producto():
        if id_producto:
               surcursal_provisoria.eliminar_producto(id_producto)
               listBoxProductos.delete(posicion_producto)
+              SelecProducto()
        else:
               print("No hay elemento seleccionado")
+
+def buscar_producto():
+       search = text_box_busqueda.get()
+       productos = listBoxProductos.get(0, END)
+       productos_array = list(productos)
+       n = 0
+       print("buscando " + search)
+       for producto in productos_array:
+              if str(search) in producto:
+                     listBoxProductos.select_clear(0, END)
+                     listBoxProductos.select_set(n)
+                     print(search + "encontrado")
+                     break
+
+              n = n+1
+
 #=======================Malla para organizar
 frame_0 = Frame(root)
 frame_0.pack()
 frame_listbox = Frame(root)
-frame_listbox.pack(pady=(50,10))
+frame_listbox.pack(pady=(50,5))
+frame_search = Frame(root)
+frame_search.pack(pady=(4,4))
 frame_botones = Frame(root)
 frame_botones.pack()
 frame_1 = Frame(root)
@@ -52,6 +71,12 @@ lbl_iniciar.pack(pady=(70,0))
 #================ListBox=====
 listBoxProductos = Listbox(frame_listbox, width=50, height=10, borderwidth=1, relief="solid")
 listBoxProductos.pack()
+grid_busqueda = Frame(frame_search, bd=2)
+grid_busqueda.grid(row=1, column=0)
+text_box_busqueda = Entry(grid_busqueda, width=40, borderwidth=1, relief="solid")
+text_box_busqueda.grid(row=0, column=0)
+boton_search = Button(grid_busqueda, text="Buscar", command=buscar_producto, bg = "lightgrey", borderwidth=1, relief="solid")
+boton_search.grid(row=0, column=1, padx= 4)
 #==========================
 
 
@@ -114,6 +139,11 @@ def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesari
               else:
                      print("No se encuentra")
        else:
+              labelNombre.config(text=f"Nombre del Producto: ")
+              labelId.config(text=f"Id del Producto: ")
+              label_precio_compra.config(text=f"Precio de Compra: ")
+              labelPrecio.config(text=f"Precio de Venta: ")
+              labelCantidad.config(text=f"Stock del Producto: ")
               print("No hay producto seleccionado")
 
 #===========================================
