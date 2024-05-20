@@ -10,68 +10,77 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     ventana_Editar.focus() #Se fuerza la visualizacion de la ventana actual
     ventana_Editar.grab_set() #Se bloquea toda ventana que no sea esta (Debe usarse junto al metodo .focus)
     ventana_Editar.geometry("400x200")
-
+    producto_seleccionado = surcursal_provisoria.productos[elemento_selecionado] #Para acortar el llamado de productos en la pagina
     def cerrar_Editar():
+        print("Se ciera ventana Editar")
         ventana_Editar.destroy() #Metodo que es llamado para cerrar la ventana
 
     #En esta malla estructurare toda la ventana
     #Por cierto esta ventana es basicamente un copypaste
-    
 
-    def guardarCambios(elemento_selecionado):
-        nombre = textBoxNombre.get()
-        cantidad = int(textBoxCantidad.get())
-        precioCompra = int(textBoxPrecioCompra.get())
-        precioVenta = int(textBoxPrecioVenta.get())
-        surcursal_provisoria.productos[elemento_selecionado].nombre = nombre
-        surcursal_provisoria.productos[elemento_selecionado].cantidad = cantidad
-        surcursal_provisoria.productos[elemento_selecionado].precio_Compra = precioCompra
-        surcursal_provisoria.productos[elemento_selecionado].precio_Venta = precioVenta
+    def guardarCambios():
+        try:
+            producto_repetido = False
+            nombre = textBoxNombre.get()
+            cantidad = int(textBoxCantidad.get())
+            precioCompra = int(textBoxPrecioCompra.get())
+            precioVenta = int(textBoxPrecioVenta.get())
 
-    mallaPrincipal = Frame(ventana_Editar, bd=2)
-    mallaPrincipal.grid(row=0, column=0)
+            productos = listBoxProductos.get(0, END)
+            for producto in productos:
+                producto_nombre, producto_id = producto.split()
+                if producto_nombre == nombre and producto_id != producto_seleccionado.get_id():
+                    producto_repetido = True
+                    print("El nombre es el mismo")
+                    break
+            if producto_repetido:
+                print("Se encontro producto repetido, cambios no realizados")
+            else:
+                producto_seleccionado.set_nombre(nombre)
+                producto_seleccionado.set_stock(cantidad)
+                producto_seleccionado.set_precio_compra(precioCompra)
+                producto_seleccionado.set_precio_venta(precioVenta)
+                cerrar_Editar()
+        except:
+            print("Erro en metodo guardarCambios en 'Editar.py'")
 
+    mallaPrincipal = Frame(ventana_Editar, bd=4)
+    mallaPrincipal.pack()
 
-        #Quiero que la estructura sea algo como
-        #LabelNombre    - LabelCantidad
-        #TextBoxNombre  - TextBoxCantidad
-        #LabelPrecioC   - LabelPrecioV
-        #TextBoxPrecioC - TextBoxPrecioV
-    #Nombre
-    labelNombre = Label(mallaPrincipal,text="Nombre:")
-    labelNombre.grid(row=0,column=0)
-    textBoxNombre = Entry(mallaPrincipal)
+    # Agregar Nombre
+    labelNombre = Label(mallaPrincipal, text="Nombre:")
+    labelNombre.grid(row=0, column=0)
+    textBoxNombre = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxNombre.grid(row=1, column=0)
+    textBoxNombre.insert(0, producto_seleccionado.get_nombre())
 
-    #Cantidad
+    # Cantidad
     labelCantidad = Label(mallaPrincipal, text="Cantidad:")
-    labelCantidad.grid(row=0,column=1)
-    textBoxCantidad = Entry(mallaPrincipal)
+    labelCantidad.grid(row=0, column=1)
+    textBoxCantidad = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxCantidad.grid(row=1, column=1)
+    textBoxCantidad.insert(0, producto_seleccionado.get_stock())
 
-    #Agrebar Precio Compra
+    # Precio Compra
     labelPrecioCompra = Label(mallaPrincipal, text="Precio Compra:")
     labelPrecioCompra.grid(row=2, column=0)
-    textBoxPrecioCompra = Entry(mallaPrincipal)
+    textBoxPrecioCompra = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioCompra.grid(row=3, column=0)
+    textBoxPrecioCompra.insert(0, producto_seleccionado.get_precio_compra())
 
-    #Agregar Precio Venta
-    labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta")
-    labelPrecioVenta.grid(row=2,column=1)
-    textBoxPrecioVenta = Entry(mallaPrincipal)
+    # Precio Venta
+    labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta:")
+    labelPrecioVenta.grid(row=2, column=1)
+    textBoxPrecioVenta = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioVenta.grid(row=3, column=1)
+    textBoxPrecioVenta.insert(0, producto_seleccionado.get_precio_venta())
 
-
-    mallaBotones = Frame(mallaPrincipal)
-    mallaBotones.grid(row=4, column=3)
-
-    boton_Salir = Button(mallaBotones, text="Salir", command=cerrar_Editar)
-    boton_Salir.grid(row=0,column=0)
-    boton_Aceptar = Button(mallaBotones, text="Aceptar", command=lambda : guardarCambios(elemento_selecionado()))
-    boton_Aceptar.grid(row=0, column=1)
-    
-
-
+    malla_botones = Frame(ventana_Editar, bd=8)
+    malla_botones.pack()
+    botonAgregar = Button(malla_botones, text="Aceptar", command=guardarCambios, bg="lightgrey", borderwidth=1, relief="solid")
+    botonAgregar.grid(row=0, column=0, padx=15)
+    botonCerrar = Button(malla_botones, text="Cerrar", command=cerrar_Editar, bg="lightgrey", borderwidth=1, relief="solid")
+    botonCerrar.grid(row=0, column=1)
 
 
 

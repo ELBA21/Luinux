@@ -21,7 +21,7 @@ def abrirAgregar():
        Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
        actualizar_productos()                                            #Asi evitamos importaciones circulares
 def abrir_Editar():
-       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto)
+       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto())
        actualizar_productos()
 
 def eliminar_Producto():
@@ -39,12 +39,12 @@ def buscar_producto():
        productos = listBoxProductos.get(0, END)
        productos_array = list(productos)
        n = 0
-       print("buscando " + search)
+       print("Buscando " + search)
        for producto in productos_array:
               if str(search) in producto:
                      listBoxProductos.select_clear(0, END)
                      listBoxProductos.select_set(n)
-                     print(search + "encontrado")
+                     print(search + " encontrado")
                      break
 
               n = n+1
