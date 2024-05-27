@@ -50,10 +50,10 @@ def agregar():
             cerrar_agregar()
         cerrar_agregar()    
     #Boton Agregar
-    btn_agregar = Button(frame3_agregar, text="Crear",command=agregar_listbox, bg= "lightgrey", borderwidth=1, relief="solid" )
+    btn_agregar = Button(frame3_agregar, text="Crear",command=agregar_listbox, bg= "lightgrey", borderwidth=1, relief="solid", width=6, height=1)
     btn_agregar.pack()
-    btn_cerrar = Button(frame3_agregar, text="Cerrar", command=cerrar_agregar,  bg= "lightgrey", borderwidth=1, relief="solid" )
-    btn_cerrar.pack()
+    btn_cerrar = Button(frame3_agregar, text="Cerrar", command=cerrar_agregar, bg= "grey", borderwidth=1, relief="solid" )
+    btn_cerrar.pack(pady=10)
     #Esto es para que funcione el botón con la tecla "Enter"
     nombre_sucursal.bind("<Return>", lambda event: btn_agregar.invoke())
 #====================================================================================
