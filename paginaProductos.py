@@ -9,7 +9,7 @@ import Editar
 
 #===================== Crear la ventana principal
 root = Tk()
-root.geometry("480x480")
+root.geometry("480x600")
 root.title("Lista de Productos")
 #====================================
 
