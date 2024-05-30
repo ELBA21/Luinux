@@ -21,8 +21,10 @@ def abrirAgregar():
        Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos) #Insertamos las clases a llamar en los metodos
        actualizar_productos()                                            #Asi evitamos importaciones circulares
 def abrir_Editar():
-       Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto())
-       actualizar_productos()
+       if SelecProducto() != None: #hacemos esto para no abrir una ventana vacia a la hora de editar
+              Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto())
+              actualizar_productos()
+
 
 def eliminar_Producto():
        id_producto = SelecProducto()
@@ -40,13 +42,12 @@ def buscar_producto():
        productos_array = list(productos)
        n = 0
        print("Buscando " + search)
-       for producto in productos_array:
-              if str(search) in producto:
+       for producto in productos_array:  #busqueda
+              if str(search) in producto: #si el string se encuentra en la lista seleccionara la primera coincidencia
                      listBoxProductos.select_clear(0, END)
                      listBoxProductos.select_set(n)
-                     print(search + " encontrado")
+                     print(search + " encontrado") 
                      break
-
               n = n+1
 
 #=======================Malla para organizar
@@ -138,6 +139,7 @@ def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesari
                      return id_producto
               else:
                      print("No se encuentra")
+                     return None
        else:
               labelNombre.config(text=f"Nombre del Producto: ")
               labelId.config(text=f"Id del Producto: ")
@@ -145,6 +147,7 @@ def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesari
               labelPrecio.config(text=f"Precio de Venta: ")
               labelCantidad.config(text=f"Stock del Producto: ")
               print("No hay producto seleccionado")
+              return None
 
 #===========================================
 
@@ -152,10 +155,11 @@ def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesari
 listBoxProductos.bind("<<ListboxSelect>>", SelecProducto)
 def actualizar_productos():
        listBoxProductos.delete(0, END)
-
+       lista_aux = []
        for key, producto in surcursal_provisoria.productos.items():
-            StringUnica = producto.nombre + " " + producto.id 
-            listBoxProductos.insert(END, StringUnica)
-            #Tuve que concatenarlas porque si se colocan por separado abajo cambia de tipo, pasa de ser String a tupla. Y es paja trabajar :p
-
+              StringUnica = producto.nombre + " " + producto.id 
+              lista_aux.append(str(StringUnica))
+              #Tuve que concatenarlas porque si se colocan por separado abajo cambia de tipo, pasa de ser String a tupla. Y es paja trabajar :p
+       lista_aux.sort() #ordenamos la lista
+       listBoxProductos.insert(END, *lista_aux) #el diccionario sigue "desordenado" pero visualmente se  ve alfabeticamente ordenado
 root.mainloop()

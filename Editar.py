@@ -1,4 +1,5 @@
 from tkinter import *
+from Productos import Productos
 def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, elemento_selecionado):
     ventana_Editar = Toplevel(pagina_Principal)
     #TopLevel es un metodo que asigna una jerarquia entre las ventanas
@@ -38,6 +39,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
             else:
                 producto_seleccionado.set_nombre(nombre)
                 producto_seleccionado.set_stock(cantidad)
+                producto_seleccionado.set_id(Productos.generar_id(nombre)) #temporary
                 producto_seleccionado.set_precio_compra(precioCompra)
                 producto_seleccionado.set_precio_venta(precioVenta)
                 cerrar_Editar()

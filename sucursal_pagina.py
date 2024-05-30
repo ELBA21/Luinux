@@ -13,7 +13,21 @@ usuario_provisorio =  Usuario("Nombre Usuario", "Contra Usuario")
 usuario_provisorio.sucursales = {}
 
 def abrir_sucursal():
-    print("Agustin pollo")
+    print("Nelson")
+
+def buscar_sucursal_func():
+       search = buscar_sucursal.get()
+       sucursales = listbox_sucursal.get(0, END)
+       sucursales_array = list(sucursales)
+       n = 0
+       print("Buscando " + search)
+       for sucursal in sucursales_array:  #busqueda
+              if str(search) in sucursales_array: #si el string se encuentra en la lista seleccionara la primera coincidencia
+                     listbox_sucursal.select_clear(0, END)
+                     listbox_sucursal.select_set(n)
+                     print(search + " encontrado") 
+                     break
+              n = n+1
 #===============Función de agregar===============
 #Función y ventana emergente :D
 def agregar():
@@ -62,7 +76,7 @@ def modificar():
 
     top2 = Toplevel()
     top2.geometry("360x240")
-    top2.title("Modificar sucursal")
+    top2.title("Modificar Sucursal")
     frame1_modificar = Frame(top2)
     frame1_modificar.pack(pady=10)
     label_modificar = Label(frame1_modificar, text= "Modificar sucursal", font="Helvetica 15").pack()
@@ -116,13 +130,16 @@ def onFocusOut(event):
     if buscar_sucursal.get() == '':
         buscar_sucursal.insert(0, 'Buscar')
         buscar_sucursal.config(fg='grey')
-
-buscar_sucursal = Entry(frame4, width=25, borderwidth=1, relief="solid")
+buscar_grid = Frame(frame4, bd=2)
+buscar_grid.pack()
+buscar_sucursal = Entry(buscar_grid, width=25, borderwidth=1, relief="solid")
 buscar_sucursal.insert(0, 'Buscar')
 buscar_sucursal.bind('<FocusIn>', onFocusIn)
 buscar_sucursal.bind('<FocusOut>', onFocusOut)
 buscar_sucursal.config(fg='grey')
-buscar_sucursal.pack()
+buscar_sucursal.grid(row=0, column=0)
+buscar_boton = Button(buscar_grid, text="Buscar", command=buscar_sucursal_func, padx=5, bg="lightgrey", borderwidth=1, relief="solid")
+buscar_boton.grid(row=0, column=1)
 #======================================================
 
 #Último botón
