@@ -10,7 +10,7 @@ import Editar
 #===================== Crear la ventana principal
 root = Tk()
 root.geometry("480x600")
-root.title("Lista de Productos")
+root.title("Lista de productos")
 #====================================
 
 surcursal_provisoria = Sucursal(1)
@@ -100,17 +100,17 @@ BotonVender.grid(row=0, column=3, padx=4)
 mallaDeLabels = Frame(frame_1, borderwidth=1, relief="solid")
 mallaDeLabels.grid(row=2, column=0, pady=10)
 
-LabelInformacion = Label(mallaDeLabels,text="Información del Producto:")
+LabelInformacion = Label(mallaDeLabels,text="Información del producto:")
 LabelInformacion.grid(row=5, column=0)
-labelNombre = Label(mallaDeLabels, text="Nombre del Producto:")
+labelNombre = Label(mallaDeLabels, text="Nombre del producto:")
 labelNombre.grid(row=6, column=0, padx=100)
-labelId = Label(mallaDeLabels, text="ID del Producto")
+labelId = Label(mallaDeLabels, text="ID del producto")
 labelId.grid(row=7, column=0)
-label_precio_compra = Label(mallaDeLabels, text="Precio de Compra:")
+label_precio_compra = Label(mallaDeLabels, text="Precio de compra:")
 label_precio_compra.grid(row=8, column=0)
-labelPrecio = Label(mallaDeLabels, text="Precio de Venta:")
+labelPrecio = Label(mallaDeLabels, text="Precio de venta:")
 labelPrecio.grid(row=9, column=0)
-labelCantidad = Label(mallaDeLabels, text="Cantidad del Producto:")
+labelCantidad = Label(mallaDeLabels, text="Cantidad del producto:")
 labelCantidad.grid(row=10, column=0)
 
 #============================================
@@ -131,21 +131,21 @@ def SelecProducto(event=None): #Ponerle el none, sirve para que no deba necesari
               producto = surcursal_provisoria.get_producto(id_producto)
               if producto:
                      print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
-                     labelNombre.config(text=f"Nombre del Producto: {producto.nombre}")
-                     labelId.config(text=f"Id del Producto: {producto.id}")
-                     label_precio_compra.config(text=f"Precio de Compra: {producto.precio_compra}")
-                     labelPrecio.config(text=f"Precio de Venta: {producto.precio_venta}")
-                     labelCantidad.config(text=f"Stock del Producto: {producto.stock}")
+                     labelNombre.config(text=f"Nombre del producto: {producto.nombre}")
+                     labelId.config(text=f"Id del producto: {producto.id}")
+                     label_precio_compra.config(text=f"Precio de compra: {producto.precio_compra}")
+                     labelPrecio.config(text=f"Precio de venta: {producto.precio_venta}")
+                     labelCantidad.config(text=f"Stock del producto: {producto.stock}")
                      return id_producto
               else:
                      print("No se encuentra")
                      return None
        else:
-              labelNombre.config(text=f"Nombre del Producto: ")
-              labelId.config(text=f"Id del Producto: ")
-              label_precio_compra.config(text=f"Precio de Compra: ")
-              labelPrecio.config(text=f"Precio de Venta: ")
-              labelCantidad.config(text=f"Stock del Producto: ")
+              labelNombre.config(text=f"Nombre del producto: ")
+              labelId.config(text=f"Id del producto: ")
+              label_precio_compra.config(text=f"Precio de compra: ")
+              labelPrecio.config(text=f"Precio de venta: ")
+              labelCantidad.config(text=f"Stock del producto: ")
               print("No hay producto seleccionado")
               return None
 

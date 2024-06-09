@@ -2,7 +2,7 @@ from tkinter import *
 
 def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):   
     agregar = Toplevel(principalProductos)
-    agregar.title("Agregar Producto")
+    agregar.title("Agregar producto")
     agregar.focus()
     agregar.grab_set()
     agregar.geometry("400x200")
