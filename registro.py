@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 def set_placeholder(entry, placeholder_text):
     entry.insert(0, placeholder_text)
@@ -16,6 +17,19 @@ def set_placeholder(entry, placeholder_text):
 
     entry.bind("<FocusIn>", on_focus_in)
     entry.bind("<FocusOut>", on_focus_out)
+
+def confirmar_contraseña():
+    password = contraseña_textbox.get()
+    confirmar_contraseña = confirmar_contraseña_textbox.get()
+    if password == "Ingrese su contraseña" or confirmar_contraseña == "Confirme su contraseña":
+        messagebox.showerror("Error", "Debe ingresar una contraseña y confirmarla")
+        return False
+    elif password != confirmar_contraseña:
+        messagebox.showerror("Error", "Las contraseñas no coinciden")
+        return False
+    else:
+        messagebox.showinfo("Éxito", "Usuario registrado exitosamente")
+        return True
 
 root = Tk()
 root.title("Registro")
@@ -51,7 +65,7 @@ confirmar_contraseña_textbox = Entry(frame, width=24, borderwidth=1, relief="so
 confirmar_contraseña_textbox.grid(row=3, column=1, padx=10, pady=(0,5))
 set_placeholder(confirmar_contraseña_textbox, "Confirme su contraseña")
 
-boton = Button(frame_boton, text="Crear", bg="lightgrey", borderwidth=1, relief="solid")
+boton = Button(frame_boton, text="Crear", bg="lightgrey", borderwidth=1, relief="solid", command=confirmar_contraseña)
 boton.pack(pady=20)
 
 root.mainloop()
