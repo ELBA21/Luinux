@@ -11,7 +11,6 @@ class Sucursal:
         self.nombre = nombre
 usuario_provisorio =  Usuario("Nombre Usuario", "Contra Usuario")
 usuario_provisorio.sucursales = {}
-
 def abrir_sucursal():
     print("Nelson")
 
@@ -28,6 +27,14 @@ def buscar_sucursal_func():
                      print(search + " encontrado") 
                      break
               n = n+1
+def selec_sucursal(event =None):
+    indice = listbox_sucursal.curselection()
+    string = listbox_sucursal.get(indice)
+    sucursal = usuario_provisorio.get_sucursal(string)
+    if sucursal:
+        print("sucursal_pagina -> selec_sucursal")
+        print("Nombre: " + sucursal.get_nombre())
+        return string
 #===============Función de agregar===============
 #Función y ventana emergente :D
 def agregar():
@@ -51,18 +58,14 @@ def agregar():
     def cerrar_agregar():
         print("Se cierra agregar_sucursal")
         top1.destroy()
-    #La siguiente función es para almacenar lo escrito por la entrada a la listbox
     def agregar_listbox():
-        nombre = nombre_sucursal.get()
-        if nombre in usuario_provisorio.sucursales:
-            print("sucursal_pagina -> agregar_listbox")
-            print("Ya existe un elemento con ese nombre")
+        if nombre_sucursal.get():
+            usuario_provisorio.crear_sucursal(nombre_sucursal.get())
+            actualizar_sucursales()
+            top1.destroy()
         else:
-            usuario_provisorio.crear_sucursal(nombre)
-            listbox_sucursal.insert(END, nombre)
-            nombre_sucursal.delete(0, END)
-            cerrar_agregar()
-        cerrar_agregar()    
+            print("texto vacio")
+        
     #Boton Agregar
     btn_agregar = Button(frame3_agregar, text="Crear",command=agregar_listbox, bg= "lightgrey", borderwidth=1, relief="solid", width=6, height=1)
     btn_agregar.pack()
@@ -73,26 +76,49 @@ def agregar():
 #====================================================================================
 # Función de modificar (en proceso)
 def modificar():
+    if selec_sucursal() == None:
+        print("sucursal_pagina -> modificar: No se selecciono producto")
+    else:
+        sucursal_seleccionada = usuario_provisorio.sucursales[selec_sucursal()]
+        top2 = Toplevel()
+        top2.geometry("360x240")
+        top2.title("Modificar Sucursal")
+        frame1_modificar = Frame(top2)
+        frame1_modificar.pack(pady=10)
+        label_modificar = Label(frame1_modificar, text= "Modificar sucursal", font="Helvetica 15")
+        label_modificar.pack(pady=10)
+        entry_modificar = Entry(frame1_modificar, borderwidth=1, relief="solid")
+        entry_modificar.pack(pady=10)
+        nombre_antiguo =sucursal_seleccionada.get_nombre()
+        def guardar_cambios(a):
+            usuario_provisorio.cambiar_nombre_sucursal(entry_modificar.get(), nombre_antiguo)    
+            actualizar_sucursales()
+            top2.destroy()
 
-    top2 = Toplevel()
-    top2.geometry("360x240")
-    top2.title("Modificar Sucursal")
-    frame1_modificar = Frame(top2)
-    frame1_modificar.pack(pady=10)
-    label_modificar = Label(frame1_modificar, text= "Modificar sucursal", font="Helvetica 15").pack()
+        frame_botones = Frame(frame1_modificar)
+        frame_botones.pack(pady=10)
+        boton_guardar_modificar = Button(frame_botones, text="Guardar",command=lambda:guardar_cambios(nombre_antiguo), bg="lightgrey", borderwidth=1, relief="solid" )
+        boton_guardar_modificar.pack(pady=5)
+        boton_cerrar_modificar = Button(frame_botones,text="Cerrar", command=lambda:top2.destroy(),bg="lightgrey", borderwidth=1,relief="solid")
+        boton_cerrar_modificar.pack(padx=4)
+        
 
 # Función de eliminar
 def eliminar_sucursal():
-    seleccion = listbox_sucursal.curselection()
-    string_Sucursal = selec_Sucursal()
-    if seleccion:
-        indice = seleccion[0]
-        if usuario_provisorio.sucursales:  # Verificar si la lista no está vacía
-            usuario_provisorio.eliminar_sucursal(string_Sucursal)
-            listbox_sucursal.delete(indice)
-        else:
-            print("La lista de sucursales está vacía.")
+    if selec_sucursal() == None:
+        print("No se ha seleccionado nada")
+    else:
+        sucursal_seleccionada = usuario_provisorio.sucursales[selec_sucursal()]
+        usuario_provisorio.eliminar_sucursal(sucursal_seleccionada.get_nombre())
+        actualizar_sucursales()
 
+def actualizar_sucursales():
+    listbox_sucursal.delete(0,END)
+    lista_aux=[]
+    for key,sucursal in usuario_provisorio.sucursales.items():
+        lista_aux.append(f"{key}") #No se como cresta esto funciono, no pregunten
+    lista_aux.sort()
+    listbox_sucursal.insert(END, *lista_aux)
 
 #Todos los frames a utilizar 
 frame1 = Frame(root)
@@ -119,6 +145,7 @@ btn3 = Button(frame2, text="Eliminar", padx=5, pady=2, command=eliminar_sucursal
 #Listbox
 listbox_sucursal = Listbox(frame3, width=40, height=12, borderwidth=1, relief="solid")
 listbox_sucursal.pack()
+listbox_sucursal.bind("<<ListboxSelect>>", selec_sucursal)
 
 #===================Placeholder========================
 def onFocusIn(event):
@@ -145,21 +172,6 @@ buscar_boton.grid(row=0, column=1)
 #Último botón
 btn4 = Button(frame5, text="Ingresar", command=abrir_sucursal, padx=5, bg= "lightgrey", borderwidth=1, relief="solid")
 btn4.pack()
-
-def selec_Sucursal(event = None):
-    indice = listbox_sucursal.curselection()
-    if indice:
-        i = indice[0]
-        string = listbox_sucursal.get(i)
-        sucursal = usuario_provisorio.get_sucursal(string)
-        if sucursal:
-            print("sucursal_pagina -> selec_Sucursal " + string)
-            return string
-        else: 
-            print("No se encuentra")            
-    else:
-        print("No hay nada seleccionado")
-
 
 
 root.mainloop()
