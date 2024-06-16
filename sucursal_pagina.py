@@ -1,6 +1,6 @@
 from tkinter import *
 from Usuario import Usuario
-
+import paginaProductos
 root = Tk()
 
 root.geometry("480x480")
@@ -12,29 +12,37 @@ class Sucursal:
 usuario_provisorio =  Usuario("Nombre Usuario", "Contra Usuario")
 usuario_provisorio.sucursales = {}
 def abrir_sucursal():
-    print("Nelson")
+    if selec_sucursal == None:
+        print("No se ha selccionado nada")
+    else:
+        sucursal_seleccionada = usuario_provisorio.sucursales[selec_sucursal()]
+        root.withdraw()
+        paginaProductos.abrir_pagina_productos(root, sucursal_seleccionada)
+        
+        
 
 def buscar_sucursal_func():
-       search = buscar_sucursal.get()
-       sucursales = listbox_sucursal.get(0, END)
-       sucursales_array = list(sucursales)
-       n = 0
-       print("Buscando " + search)
-       for sucursal in sucursales_array:  #busqueda
-              if str(search) in sucursales_array: #si el string se encuentra en la lista seleccionara la primera coincidencia
-                     listbox_sucursal.select_clear(0, END)
-                     listbox_sucursal.select_set(n)
-                     print(search + " encontrado") 
-                     break
-              n = n+1
+    search = buscar_sucursal.get()
+    sucursales = listbox_sucursal.get(0, END)
+    sucursales_array = list(sucursales)
+    n = 0
+    print("Buscando " + search)
+    for sucursal in sucursales_array:  #busqueda
+            if str(search) in sucursales_array: #si el string se encuentra en la lista seleccionara la primera coincidencia
+                    listbox_sucursal.select_clear(0, END)
+                    listbox_sucursal.select_set(n)
+                    print(search + " encontrado") 
+                    break
+            n = n+1
 def selec_sucursal(event =None):
     indice = listbox_sucursal.curselection()
-    string = listbox_sucursal.get(indice)
-    sucursal = usuario_provisorio.get_sucursal(string)
-    if sucursal:
-        print("sucursal_pagina -> selec_sucursal")
-        print("Nombre: " + sucursal.get_nombre())
-        return string
+    if indice:  
+        string = listbox_sucursal.get(indice)
+        sucursal = usuario_provisorio.get_sucursal(string)
+        if sucursal:
+            print("sucursal_pagina -> selec_sucursal")
+            print(f"Nombre + {sucursal.get_nombre()}")
+            return string
 #===============Función de agregar===============
 #Función y ventana emergente :D
 def agregar():
@@ -157,6 +165,7 @@ def onFocusOut(event):
     if buscar_sucursal.get() == '':
         buscar_sucursal.insert(0, 'Buscar')
         buscar_sucursal.config(fg='grey')
+
 buscar_grid = Frame(frame4, bd=2)
 buscar_grid.pack()
 buscar_sucursal = Entry(buscar_grid, width=25, borderwidth=1, relief="solid")
