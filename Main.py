@@ -5,6 +5,7 @@ from Usuario import *
 from Sucursal import *
 from Productos import *
 import json
+import registro
 
 def guardar(admin):
     admin_dict = admin.to_dict()
@@ -36,25 +37,6 @@ if os.path.exists("datos.json"):
         datos = json.load(archivo)
         cargar(admin, datos)
 
-def registrarse_action():
-    admin.registrarUsuario(usuario(), contrasenia())
-    guardar(admin)
-
-def loguearse_action():
-    if usuario() in admin.usuarios:
-        if contrasenia() == admin.usuarios[usuario()].get_password():
-            print("LOGUEADOOOOOOO PAAAAA")
-        else:
-            print("CONTRA INCORRECTA")
-    else:
-        print("Usuario no encontrado")
-
-def usuario():
-    return usuario_textbox.get()
-
-def contrasenia():
-    return password_textbox.get()
-
 def set_placeholder(entry, placeholder_text):
     entry.insert(0, placeholder_text)
     entry.config(fg='grey')
@@ -72,41 +54,61 @@ def set_placeholder(entry, placeholder_text):
     entry.bind("<FocusIn>", on_focus_in)
     entry.bind("<FocusOut>", on_focus_out)
 
-root = Tk() 
+def procedimiento():
+    def usuario():
+        return usuario_textbox.get()
 
-#==============FRAMES==============
-frame_usuarios = Frame(root)
-frame_usuarios.pack(pady=(80,0))
-frame1_usuarios = Frame(root)
-frame1_usuarios.pack(pady=(45,0))
-frame2_usuarios = Frame(root)
-frame2_usuarios.pack(pady=5)
-#==================================
+    def contrasenia():
+        return password_textbox.get()
+    
+    def registrarse_action():
+        admin.registrarUsuario(usuario(), contrasenia())
+        guardar(admin)
 
-root.title("Inventario") 
-root.geometry("480x480") 
+    def loguearse_action():
+        if usuario() in admin.usuarios:
+            if contrasenia() == admin.usuarios[usuario()].get_password():
+                print("LOGUEADOOOOOOO PAAAAA")
+            else:
+                print("CONTRA INCORRECTA")
+        else:
+            print("Usuario no encontrado")
+    
+    root = Tk() 
 
-lbl_iniciar = Label(frame_usuarios, text="INICIAR SESIÓN", font="Helvetica 15")
-lbl_iniciar.pack()
+    #==============FRAMES==============
+    frame_usuarios = Frame(root)
+    frame_usuarios.pack(pady=(80,0))
+    frame1_usuarios = Frame(root)
+    frame1_usuarios.pack(pady=(45,0))
+    frame2_usuarios = Frame(root)
+    frame2_usuarios.pack(pady=5)
+    #==================================
 
-lbl_usuario = Label(frame1_usuarios, text="Usuario", font="Helvetica 11")
-lbl_usuario.pack()
+    root.title("Inventario") 
+    root.geometry("480x480") 
 
-usuario_textbox = Entry(frame2_usuarios, width=24, borderwidth=1, relief="solid")
-usuario_textbox.pack(pady=(0,5))
-set_placeholder(usuario_textbox, "Ingrese su usuario")
+    lbl_iniciar = Label(frame_usuarios, text="INICIAR SESIÓN", font="Helvetica 15")
+    lbl_iniciar.pack()
 
-lbl_password = Label(frame2_usuarios, text="Contraseña", font="Helvetica 11")
-lbl_password.pack()
+    lbl_usuario = Label(frame1_usuarios, text="Usuario", font="Helvetica 11")
+    lbl_usuario.pack()
 
-password_textbox = Entry(frame2_usuarios, width=24, show="●", borderwidth=1, relief="solid")
-password_textbox.pack(pady=5)
-set_placeholder(password_textbox, "Ingrese su contraseña")
+    usuario_textbox = Entry(frame2_usuarios, width=24, borderwidth=1, relief="solid")
+    usuario_textbox.pack(pady=(0,5))
+    set_placeholder(usuario_textbox, "Ingrese su usuario")
 
-btn = Button(frame2_usuarios, text="Iniciar sesion", command=loguearse_action, bg="lightgrey", borderwidth=1, relief="solid")
-btn.pack(pady=5)
+    lbl_password = Label(frame2_usuarios, text="Contraseña", font="Helvetica 11")
+    lbl_password.pack()
 
-registrarse = Button(frame2_usuarios, text="Registrarse", command=registrarse_action, bg="lightgrey", borderwidth=1, relief="solid")
-registrarse.pack()
+    password_textbox = Entry(frame2_usuarios, width=24, show="●", borderwidth=1, relief="solid")
+    password_textbox.pack(pady=5)
+    set_placeholder(password_textbox, "Ingrese su contraseña")
 
-root.mainloop()
+    btn = Button(frame2_usuarios, text="Iniciar sesion", command=loguearse_action, bg="lightgrey", borderwidth=1, relief="solid")
+    btn.pack(pady=5)
+
+    registrarse = Button(frame2_usuarios, text="Registrarse", command=registro.procedimiento, bg="lightgrey", borderwidth=1, relief="solid")
+    registrarse.pack()
+
+    root.mainloop()
