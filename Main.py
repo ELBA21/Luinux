@@ -66,9 +66,11 @@ def procedimiento():
         guardar(admin)
 
     def loguearse_action():
+        from sucursal_pagina_2 import abrir_usuario
         if usuario() in admin.usuarios:
             if contrasenia() == admin.usuarios[usuario()].get_password():
                 print("LOGUEADOOOOOOO PAAAAA")
+                abrir_usuario(usuario())
             else:
                 print("CONTRA INCORRECTA")
         else:
