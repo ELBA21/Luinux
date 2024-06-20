@@ -1,18 +1,36 @@
 from tkinter import *
+from tkinter import messagebox
 from Usuario import Usuario
 import paginaProductos
 
 from Main import admin
 from Main import guardar
 
-def buscar_sucursal_func():
-    return
 
-def abrir_sucursal():
-    return
 
-def abrir_usuario(nombre):
+def abrir_usuario(nombre,pagina_superior):
     usuario = admin.getUsuario(nombre)
+    def abrir_sucursal():
+        if selec_sucursal == None:
+            messagebox.showerror("Error", "No se ha seleccionado nada")
+            print("No se ha selccionado nada")
+        else:
+            sucursal_seleccionada = usuario.sucursales[selec_sucursal()]
+            paginaProductos.abrir_pagina_productos(root, sucursal_seleccionada)
+
+    def buscar_sucursal_func():
+        search = buscar_sucursal.get()
+        sucursales = listbox_sucursal.get(0, END)
+        sucursales_array = list(sucursales)
+        n = 0
+        print("Buscando " + search)
+        for sucursal in sucursales_array:  #busqueda
+            if str(search) in sucursal: #si el string se encuentra en la lista seleccionara la primera coincidencia
+                    listbox_sucursal.select_clear(0, END)
+                    listbox_sucursal.select_set(n)
+                    print(search + " encontrado") 
+                    break
+            n = n+1
 
     def actualizar_sucursales():
         listbox_sucursal.delete(0,END)
@@ -31,9 +49,10 @@ def abrir_usuario(nombre):
                 print("sucursal_pagina -> selec_sucursal")
                 print(f"Nombre + {sucursal.get_nombre()}")
                 return string
-            
+
     def eliminar_sucursal():
         if selec_sucursal() == None:
+            messagebox.showerror("Error", "No se ha seleccionado nada")
             print("No se ha seleccionado nada")
         else:
             sucursal_seleccionada = usuario.sucursales[selec_sucursal()]
@@ -43,10 +62,11 @@ def abrir_usuario(nombre):
 
     def modificar():
         if selec_sucursal() == None:
+            messagebox.showerror("Error", "No se ha seleccionado nada")
             print("sucursal_pagina -> modificar: No se selecciono producto")
         else:
             sucursal_seleccionada = usuario.sucursales[selec_sucursal()]
-            top2 = Toplevel()
+            top2 = Toplevel(pagina_superior)
             top2.geometry("360x240")
             top2.title("Modificar Sucursal")
             frame1_modificar = Frame(top2)
@@ -97,7 +117,7 @@ def abrir_usuario(nombre):
                 actualizar_sucursales()
                 top1.destroy()
             else:
-                print("texto vacio")
+                messagebox.showerror("Error", "Recuadro de texto vacio")
             
         #Boton Agregar
         btn_agregar = Button(frame3_agregar, text="Crear",command=agregar_listbox, bg= "lightgrey", borderwidth=1, relief="solid", width=6, height=1)
@@ -107,10 +127,16 @@ def abrir_usuario(nombre):
         #Esto es para que funcione el botón con la tecla "Enter"
         nombre_sucursal.bind("<Return>", lambda event: btn_agregar.invoke())
 
+    
     root = Tk()
-
+    pagina_superior.withdraw()
     root.geometry("480x480")
     root.title("Sucursales")
+
+    def volver_atras(): #Este metodo debe estar aca si o si
+        root.destroy()
+        pagina_superior.deiconify()
+    root.protocol("WM_DELETE_WINDOW", volver_atras)
 
     #Todos los frames a utilizar 
     frame1 = Frame(root)

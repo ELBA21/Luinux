@@ -1,12 +1,16 @@
 from tkinter import *
+from tkinter import messagebox
 from Productos import Productos
 from Sucursal import Sucursal
 from string import *
+from Main import admin
+from Main import guardar
 import Agregar
 import Editar
 ##Cosas temporales
 def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        #Creacion de pagina
+       pagina_sucursales.withdraw()
        root = Toplevel(pagina_sucursales)
        root.geometry("480x600")
        root.title(f"{sucursal_llamada.nombre}")
@@ -43,6 +47,9 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                             labelCantidad.config(text=f"Stock del producto: {producto.stock}")
                             return id_producto
                      else:
+                            root.grab_set()
+                            messagebox.showerror("Error", "No se encuentra")
+                            root.grab_release()
                             print("No se encuentra")
                             return None
               else:
@@ -51,7 +58,8 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                      label_precio_compra.config(text=f"Precio de compra: ")
                      labelPrecio.config(text=f"Precio de venta: ")
                      labelCantidad.config(text=f"Stock del producto: ")
-                     print("No hay producto seleccionado")
+                     messagebox.showerror("Error", "No se ha seleccionado ningun producto")
+                     root.grab_release()
                      return None
        def abrirAgregar():
               Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos)
@@ -66,12 +74,16 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
               if id_producto:
                      surcursal_provisoria.eliminar_producto(id_producto)
                      listBoxProductos.delete(posicion_producto)
+                     guardar(admin)
                      SelecProducto()
               else:
-                     print("No hay elemento seleccionado")  
+                     messagebox.showerror("Error", "No has seleccionado un elemento!")
+                     print("No hay elemento seleccionado")
        def volver_a_sucursales():
-              pagina_sucursales.deiconify()
+              guardar(admin)
               root.destroy()
+              pagina_sucursales.deiconify()
+       root.protocol("WM_DELETE_WINDOW", volver_a_sucursales)
        def buscar_producto():
               search = text_box_busqueda.get()
               productos = listBoxProductos.get(0, END)

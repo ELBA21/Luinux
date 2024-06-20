@@ -1,5 +1,8 @@
 from tkinter import *
+from tkinter import messagebox
 from Productos import Productos
+from Main import admin
+from Main import guardar
 def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, elemento_selecionado):
     ventana_Editar = Toplevel(pagina_Principal)
     #TopLevel es un metodo que asigna una jerarquia entre las ventanas
@@ -32,9 +35,11 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
                 producto_nombre, producto_id = producto.split()
                 if producto_nombre == nombre and producto_id != producto_seleccionado.get_id():
                     producto_repetido = True
+                    messagebox.showerror("Error", "Has usado el mismo nombre")
                     print("El nombre es el mismo")
                     break
             if producto_repetido:
+                messagebox.showerror("Error","Se encontro producto repetido, cambios no realizados")
                 print("Se encontro producto repetido, cambios no realizados")
             else:
                 producto_seleccionado.set_nombre(nombre)
@@ -42,9 +47,11 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
                 producto_seleccionado.set_id(Productos.generar_id(nombre)) #temporary
                 producto_seleccionado.set_precio_compra(precioCompra)
                 producto_seleccionado.set_precio_venta(precioVenta)
+                guardar(admin)
                 cerrar_Editar()
         except:
-            print("Erro en metodo guardarCambios en 'Editar.py'")
+            messagebox.showerror("Error", "Error en metodo guardarCambios en 'Editar.py'")
+            print("Error en metodo guardarCambios en 'Editar.py'")
 
     mallaPrincipal = Frame(ventana_Editar, bd=4)
     mallaPrincipal.pack()

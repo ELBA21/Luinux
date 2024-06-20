@@ -64,19 +64,20 @@ def procedimiento():
     def registrarse_action():
         admin.registrarUsuario(usuario(), contrasenia())
         guardar(admin)
-
+    root = Tk() 
     def loguearse_action():
         from sucursal_pagina_2 import abrir_usuario
         if usuario() in admin.usuarios:
             if contrasenia() == admin.usuarios[usuario()].get_password():
                 print("LOGUEADOOOOOOO PAAAAA")
-                abrir_usuario(usuario())
+                abrir_usuario(usuario(),root)
+
             else:
                 print("CONTRA INCORRECTA")
         else:
             print("Usuario no encontrado")
     
-    root = Tk() 
+    
 
     #==============FRAMES==============
     frame_usuarios = Frame(root)

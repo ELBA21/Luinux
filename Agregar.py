@@ -1,5 +1,6 @@
 from tkinter import *
-
+from Main import admin
+from Main import guardar
 def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):   
     agregar = Toplevel(principalProductos)
     agregar.title("Agregar producto")
@@ -50,6 +51,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
         precioCompra = int(textBoxPrecioCompra.get())
         precioVenta = int(textBoxPrecioVenta.get())
         surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad)
+        guardar(admin)
         cerrarAgregar()
     malla_botones = Frame(agregar, bd=8)
     malla_botones.pack()
