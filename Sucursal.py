@@ -34,6 +34,7 @@ class Sucursal:
             
 
     def eliminar_producto(self, id):
+        print("eliminando " + id)
         del self.productos[id]
 
     def get_producto(self, id):
@@ -51,6 +52,9 @@ class Sucursal:
             "nombre": self.nombre,
             "productos": {producto.get_id(): producto.to_dict() for producto in self.productos.values()}
         }
+    def print_productos(self):
+        for key in self.productos:
+            print(self.productos[key].get_nombre())
     
     def from_dict(dict):
         sucursal = Sucursal(dict["nombre"])

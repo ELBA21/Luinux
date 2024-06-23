@@ -16,6 +16,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        root.title(f"{sucursal_llamada.nombre}")
        root.grab_set()
        root.focus()
+       global surcursal_provisoria
        surcursal_provisoria = sucursal_llamada
        surcursal_provisoria.productos = {}
        def actualizar_productos():

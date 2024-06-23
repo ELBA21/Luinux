@@ -23,35 +23,22 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     #Por cierto esta ventana es basicamente un copypaste
 
     def guardarCambios():
-        try:
-            producto_repetido = False
-            nombre = textBoxNombre.get()
-            cantidad = int(textBoxCantidad.get())
-            precioCompra = int(textBoxPrecioCompra.get())
-            precioVenta = int(textBoxPrecioVenta.get())
+        print("guardar cambios")
+        nombre = producto_seleccionado.get_nombre()
+        id = Productos.generar_id(nombre)
+        stock = producto_seleccionado.get_stock()
+        precio_venta = producto_seleccionado.get_precio_venta()
+        precio_compra = producto_seleccionado.get_precio_compra()
+        print("values checked")
+        #eliminamos el objeto y creamos uno nuevo
+        #lo hago asi porque es facil y se reutiliza codigo
+        surcursal_provisoria.eliminar_producto(elemento_selecionado)
+        surcursal_provisoria.agregar_productos(nombre, precio_venta, precio_compra, stock)
+        surcursal_provisoria.print_productos()
+        guardar(admin)
 
-            productos = listBoxProductos.get(0, END)
-            for producto in productos:
-                producto_nombre, producto_id = producto.split()
-                if producto_nombre == nombre and producto_id != producto_seleccionado.get_id():
-                    producto_repetido = True
-                    messagebox.showerror("Error", "Has usado el mismo nombre")
-                    print("El nombre es el mismo")
-                    break
-            if producto_repetido:
-                messagebox.showerror("Error","Se encontro producto repetido, cambios no realizados")
-                print("Se encontro producto repetido, cambios no realizados")
-            else:
-                producto_seleccionado.set_nombre(nombre)
-                producto_seleccionado.set_stock(cantidad)
-                producto_seleccionado.set_id(Productos.generar_id(nombre)) #temporary
-                producto_seleccionado.set_precio_compra(precioCompra)
-                producto_seleccionado.set_precio_venta(precioVenta)
-                guardar(admin)
-                cerrar_Editar()
-        except:
-            messagebox.showerror("Error", "Error en metodo guardarCambios en 'Editar.py'")
-            print("Error en metodo guardarCambios en 'Editar.py'")
+        cerrar_Editar()
+
 
     mallaPrincipal = Frame(ventana_Editar, bd=4)
     mallaPrincipal.pack()
