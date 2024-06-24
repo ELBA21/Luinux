@@ -31,13 +31,13 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     textBoxCantidad.grid(row=1, column=1)
 
     #Agrebar Precio Compra
-    labelPrecioCompra = Label(mallaPrincipal, text="Precio Compra:")
+    labelPrecioCompra = Label(mallaPrincipal, text="Precio compra:")
     labelPrecioCompra.grid(row=2, column=0)
     textBoxPrecioCompra = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioCompra.grid(row=3, column=0)
 
     #Agregar Precio Venta
-    labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta:")
+    labelPrecioVenta = Label(mallaPrincipal, text="Precio venta:")
     labelPrecioVenta.grid(row=2,column=1)
     textBoxPrecioVenta = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioVenta.grid(row=3, column=1)

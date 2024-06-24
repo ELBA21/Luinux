@@ -91,7 +91,7 @@ def procedimiento():
     root.title("Inventario") 
     root.geometry("480x480") 
 
-    lbl_iniciar = Label(frame_usuarios, text="INICIAR SESIÓN", font="Helvetica 15")
+    lbl_iniciar = Label(frame_usuarios, text="Iniciar sesión", font="Helvetica 15")
     lbl_iniciar.pack()
 
     lbl_usuario = Label(frame1_usuarios, text="Usuario", font="Helvetica 11")

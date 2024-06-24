@@ -49,7 +49,7 @@ def procedimiento():
     frame_boton = Frame(root)
     frame_boton.pack()
 
-    label_registro = Label(frame, text="REGISTRO", font="Helvetica 15")
+    label_registro = Label(frame, text="Registro", font="Helvetica 15")
     label_registro.grid(row=0, columnspan=2, pady=40)
 
     label_nombre = Label(frame, text="Nombre", font="Helvetica 11")

@@ -71,23 +71,29 @@ def abrir_usuario(nombre,pagina_superior):
             top2.title("Modificar Sucursal")
             frame1_modificar = Frame(top2)
             frame1_modificar.pack(pady=10)
-            label_modificar = Label(frame1_modificar, text= "Modificar sucursal", font="Helvetica 15")
+            label_modificar = Label(frame1_modificar, text="Modificar sucursal", font="Helvetica 15")
             label_modificar.pack(pady=10)
             entry_modificar = Entry(frame1_modificar, borderwidth=1, relief="solid")
             entry_modificar.pack(pady=10)
-            nombre_antiguo =sucursal_seleccionada.get_nombre()
-            def guardar_cambios(a):
+            nombre_antiguo = sucursal_seleccionada.get_nombre()
+            
+            def guardar_cambios(event=None):
                 usuario.cambiar_nombre_sucursal(entry_modificar.get(), nombre_antiguo)
-                guardar(admin)    
+                guardar(admin)
                 actualizar_sucursales()
                 top2.destroy()
 
             frame_botones = Frame(frame1_modificar)
             frame_botones.pack(pady=10)
-            boton_guardar_modificar = Button(frame_botones, text="Guardar",command=lambda:guardar_cambios(nombre_antiguo), bg="lightgrey", borderwidth=1, relief="solid" )
+            boton_guardar_modificar = Button(frame_botones, text="Guardar", command=guardar_cambios, bg="lightgrey", borderwidth=1, relief="solid")
             boton_guardar_modificar.pack(pady=5)
-            boton_cerrar_modificar = Button(frame_botones,text="Cerrar", command=lambda:top2.destroy(),bg="lightgrey", borderwidth=1,relief="solid")
+            boton_cerrar_modificar = Button(frame_botones, text="Cerrar", command=top2.destroy, bg="lightgrey", borderwidth=1, relief="solid")
             boton_cerrar_modificar.pack(padx=4)
+            
+            # Enlazar la tecla Enter al widget de entrada para que invoque guardar_cambios
+            entry_modificar.bind("<Return>", guardar_cambios)
+
+
 
     def agregar():
         top1 = Toplevel()

@@ -40,9 +40,9 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                      producto = surcursal_provisoria.get_producto(id_producto)
 
                      if producto:
-                            print(f"Nombre {producto.nombre}, Id: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
+                            print(f"Nombre {producto.nombre}, ID: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
                             labelNombre.config(text=f"Nombre del producto: {producto.nombre}")
-                            labelId.config(text=f"Id del producto: {producto.id}")
+                            labelId.config(text=f"ID del producto: {producto.id}")
                             label_precio_compra.config(text=f"Precio de compra: {producto.precio_compra}")
                             labelPrecio.config(text=f"Precio de venta: {producto.precio_venta}")
                             labelCantidad.config(text=f"Stock del producto: {producto.stock}")
@@ -55,7 +55,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                             return None
               else:
                      labelNombre.config(text=f"Nombre del producto: ")
-                     labelId.config(text=f"Id del producto: ")
+                     labelId.config(text=f"ID del producto: ")
                      label_precio_compra.config(text=f"Precio de compra: ")
                      labelPrecio.config(text=f"Precio de venta: ")
                      labelCantidad.config(text=f"Stock del producto: ")
@@ -111,7 +111,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        frame_1.pack()
        #=============================================================
 
-       lbl_iniciar = Label(frame_0, text="PRODUCTOS", font="Helvetica 15")
+       lbl_iniciar = Label(frame_0, text="Productos", font="Helvetica 15")
        lbl_iniciar.pack(pady=(70,0))
        #================ListBox=====
        listBoxProductos = Listbox(frame_listbox, width=50, height=10, borderwidth=1, relief="solid")
@@ -144,7 +144,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        LabelInformacion.grid(row=5, column=0)
        labelNombre = Label(mallaDeLabels, text="Nombre del producto:")
        labelNombre.grid(row=6, column=0, padx=100)
-       labelId = Label(mallaDeLabels, text="ID del producto")
+       labelId = Label(mallaDeLabels, text="ID del producto:")
        labelId.grid(row=7, column=0)
        label_precio_compra = Label(mallaDeLabels, text="Precio de compra:")
        label_precio_compra.grid(row=8, column=0)
