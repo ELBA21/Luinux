@@ -108,7 +108,7 @@ def procedimiento():
     password_textbox.pack(pady=5)
     set_placeholder(password_textbox, "Ingrese su contraseña")
 
-    btn = Button(frame2_usuarios, text="Iniciar sesion", command=loguearse_action, bg="lightgrey", borderwidth=1, relief="solid")
+    btn = Button(frame2_usuarios, text="Iniciar sesión", command=loguearse_action, bg="lightgrey", borderwidth=1, relief="solid")
     btn.pack(pady=5)
 
     registrarse = Button(frame2_usuarios, text="Registrarse", command=registro.procedimiento, bg="lightgrey", borderwidth=1, relief="solid")

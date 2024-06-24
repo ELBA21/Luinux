@@ -3,24 +3,18 @@ from tkinter import messagebox
 from Productos import Productos
 from Main import admin
 from Main import guardar
+
 def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, elemento_selecionado):
     ventana_Editar = Toplevel(pagina_Principal)
-    #TopLevel es un metodo que asigna una jerarquia entre las ventanas
-    #En este caso lo que pasa es que le metodo 'abrir_Editar' al ser llamado en la pagina princpal, recibe como argumento
-    #la propia ventana princial
-    #Aca en este archivo se recibe ese argumento y es insertado en el metodo TopLevel(), asi le decimos al programa
-    #que la ventana actual, esta por debajo de la principal.
-    ventana_Editar.title("Editar Valores de un Producto") #Le cambio el titutlo
-    ventana_Editar.focus() #Se fuerza la visualizacion de la ventana actual
-    ventana_Editar.grab_set() #Se bloquea toda ventana que no sea esta (Debe usarse junto al metodo .focus)
+    ventana_Editar.title("Editar Valores de un Producto")
+    ventana_Editar.focus()
+    ventana_Editar.grab_set()
     ventana_Editar.geometry("400x200")
-    producto_seleccionado = surcursal_provisoria.productos[elemento_selecionado] #Para acortar el llamado de productos en la pagina
+    producto_seleccionado = surcursal_provisoria.productos[elemento_selecionado]
+
     def cerrar_Editar():
         print("Se ciera ventana Editar")
-        ventana_Editar.destroy() #Metodo que es llamado para cerrar la ventana
-
-    #En esta malla estructurare toda la ventana
-    #Por cierto esta ventana es basicamente un copypaste
+        ventana_Editar.destroy()
 
     def guardarCambios():
         print("guardar cambios")
@@ -30,15 +24,11 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
         precio_venta = producto_seleccionado.get_precio_venta()
         precio_compra = producto_seleccionado.get_precio_compra()
         print("values checked")
-        #eliminamos el objeto y creamos uno nuevo
-        #lo hago asi porque es facil y se reutiliza codigo
         surcursal_provisoria.eliminar_producto(elemento_selecionado)
         surcursal_provisoria.agregar_productos(nombre, precio_venta, precio_compra, stock)
         surcursal_provisoria.print_productos()
         guardar(admin)
-
         cerrar_Editar()
-
 
     mallaPrincipal = Frame(ventana_Editar, bd=4)
     mallaPrincipal.pack()
@@ -78,9 +68,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     botonCerrar = Button(malla_botones, text="Cerrar", command=cerrar_Editar, bg="lightgrey", borderwidth=1, relief="solid")
     botonCerrar.grid(row=0, column=1)
 
-
-
-
-
+    # Vincula la tecla Enter al botón "Aceptar"
+    ventana_Editar.bind('<Return>', lambda event: botonAgregar.invoke())
 
     ventana_Editar.wait_window(ventana_Editar)
