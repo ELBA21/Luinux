@@ -15,7 +15,7 @@ class Sucursal:
     def set_productos(self, productos):
         self.productos = productos
 
-    def agregar_productos(self, nombre_producto, precio_venta, precio_compra, stock_producto):
+    def agregar_productos(self, nombre_producto, precio_venta, precio_compra, stock_producto, override):
         id = Productos.generar_id(nombre_producto)
         print(id)
         x = False
@@ -24,7 +24,11 @@ class Sucursal:
                 print("Promedio precio ponderado")
                 precio_final = ((producto.get_stock()*producto.get_precio_compra())+(stock_producto*precio_compra))/(producto.get_stock()+stock_producto)
                 producto.set_precio_compra(int(precio_final))
-                producto.actualizar_stock(stock_producto)
+                if override:
+                    producto.set_precio_compra(precio_compra)
+                    producto.set_stock(stock_producto)
+                else:
+                    producto.actualizar_stock(stock_producto)
                 producto.set_precio_venta(precio_venta)
                 x = True # si x es verdadera no se creara un objeto y se aplicara la funcion del precio
                 break

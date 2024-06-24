@@ -50,7 +50,7 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
         cantidad = int(textBoxCantidad.get())
         precioCompra = int(textBoxPrecioCompra.get())
         precioVenta = int(textBoxPrecioVenta.get())
-        surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad)
+        surcursal_provisoria.agregar_productos(nombre, precioVenta, precioCompra, cantidad, False)
         guardar(admin)
         cerrarAgregar()
 

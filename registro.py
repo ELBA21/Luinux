@@ -37,6 +37,7 @@ def procedimiento():
             messagebox.showinfo("Éxito", "Usuario registrado exitosamente")
             admin.registrarUsuario(registro_textbox.get(), contraseña_textbox.get())
             guardar(admin)
+            root.destroy()
             return True
     
     root = Tk()

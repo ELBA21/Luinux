@@ -17,13 +17,17 @@ def cargar(admin, datos):
     usuarios = {}
     for _, usuario_dic in datos["usuarios"].items():
         usuario = Usuario(usuario_dic["nombre_usuario"], usuario_dic["password"])
+        print("cargando " + usuario.get_nombre_usuario())
         sucursales = {}
         for _, sucursal_dic in usuario_dic["sucursales"].items():
             sucursal = Sucursal(sucursal_dic["nombre"])
+            print("cargando " + sucursal.get_nombre() + ".bsp")#referencias al mapping de source
             productos = {}
             for _, producto_dic in sucursal_dic["productos"].items():
                 producto = Productos.from_dict(producto_dic)
+                print("cargando " + producto.get_nombre() + ".vmt")
                 productos[producto.get_id()] = producto
+            print("productos en" + sucursal.get_nombre() + " " + str(len(productos)))
             sucursal.set_productos(productos)
             sucursales[sucursal.get_nombre()] = sucursal
         usuario.set_sucursales(sucursales)
@@ -69,7 +73,7 @@ def procedimiento():
         from sucursal_pagina_2 import abrir_usuario
         if usuario() in admin.usuarios:
             if contrasenia() == admin.usuarios[usuario()].get_password():
-                print("LOGUEADOOOOOOO PAAAAA")
+                print("Logueado")
                 abrir_usuario(usuario(),root)
 
             else:

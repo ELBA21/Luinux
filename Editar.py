@@ -11,21 +11,21 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     ventana_Editar.grab_set()
     ventana_Editar.geometry("400x200")
     producto_seleccionado = surcursal_provisoria.productos[elemento_selecionado]
-
+    #surcursal_provisoria.agregar_productos(1, 1, 1, 1, True)
     def cerrar_Editar():
         print("Se ciera ventana Editar")
         ventana_Editar.destroy()
 
     def guardarCambios():
         print("guardar cambios")
-        nombre = producto_seleccionado.get_nombre()
+        nombre = textBoxNombre.get()
         id = Productos.generar_id(nombre)
-        stock = producto_seleccionado.get_stock()
-        precio_venta = producto_seleccionado.get_precio_venta()
-        precio_compra = producto_seleccionado.get_precio_compra()
+        stock = textBoxCantidad.get()
+        precio_venta = textBoxPrecioVenta.get()
+        precio_compra = textBoxPrecioCompra.get()
         print("values checked")
         surcursal_provisoria.eliminar_producto(elemento_selecionado)
-        surcursal_provisoria.agregar_productos(nombre, precio_venta, precio_compra, stock)
+        surcursal_provisoria.agregar_productos(nombre, precio_venta, precio_compra, stock, True)
         surcursal_provisoria.print_productos()
         guardar(admin)
         cerrar_Editar()
