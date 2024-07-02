@@ -1,1 +1,1 @@
-{"usuarios": {"a": {"nombre_usuario": "a", "password": "a", "sucursales": {"el pico": {"nombre": "el pico", "productos": {"7541-MT": {"nombre": "sadf", "id": "7541-MT", "precio_venta": 12, "precio_compra": 12, "stock": 12}}}}}}}
+{"usuarios": {"a": {"nombre_usuario": "a", "password": "a", "sucursales": {"el pico": {"nombre": "el pico", "productos": {"4770-IB": {"nombre": "penee", "id": "4770-IB", "precio_venta": 1, "precio_compra": 1, "stock": 2}, "3479-WI": {"nombre": "pesiiii", "id": "3479-WI", "precio_venta": 1, "precio_compra": 1, "stock": 1}}}}}}}

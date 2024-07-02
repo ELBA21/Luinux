@@ -16,15 +16,13 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        root.title(f"{sucursal_llamada.nombre}")
        root.grab_set()
        root.focus()
-       global surcursal_provisoria
-       surcursal_provisoria = sucursal_llamada
-       surcursal_provisoria.productos = {}
+       #sucursal_llamada.productos = {} AWEONAOS ESTABAN BORRANDO LA WEA
        def actualizar_productos():
               print("Tesot1")
               listBoxProductos.delete(0, END)
               lista_aux = []
               print("Test2")
-              for key, producto in surcursal_provisoria.productos.items():
+              for key, producto in sucursal_llamada.productos.items():
                      print("test3")
                      StringUnica = producto.nombre + " " + producto.id 
                      lista_aux.append(str(StringUnica))
@@ -37,7 +35,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                      i = indice[0]
                      string = listBoxProductos.get(i)
                      producto_nombre, id_producto = string.split()
-                     producto = surcursal_provisoria.get_producto(id_producto)
+                     producto = sucursal_llamada.get_producto(id_producto)
 
                      if producto:
                             print(f"Nombre {producto.nombre}, ID: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
@@ -63,17 +61,17 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
                      root.grab_release()
                      return None
        def abrirAgregar():
-              Agregar.abrirAgregar(root, surcursal_provisoria, listBoxProductos)
+              Agregar.abrirAgregar(root, sucursal_llamada, listBoxProductos)
               actualizar_productos()
        def abrir_Editar():
               if SelecProducto() != None: #hacemos esto para no abrir una ventana vacia a la hora de editar
-                     Editar.abrir_Editar(root, surcursal_provisoria, listBoxProductos, SelecProducto())
+                     Editar.abrir_Editar(root, sucursal_llamada, listBoxProductos, SelecProducto())
                      actualizar_productos()
        def eliminar_Producto():
               id_producto = SelecProducto()
               posicion_producto = listBoxProductos.curselection()
               if id_producto:
-                     surcursal_provisoria.eliminar_producto(id_producto)
+                     sucursal_llamada.eliminar_producto(id_producto)
                      listBoxProductos.delete(posicion_producto)
                      guardar(admin)
                      SelecProducto()
@@ -154,4 +152,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        labelCantidad.grid(row=10, column=0)
        #============================================
        listBoxProductos.bind("<<ListboxSelect>>", SelecProducto)
+
+       actualizar_productos()
+
        root.mainloop()
