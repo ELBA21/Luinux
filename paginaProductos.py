@@ -16,7 +16,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        root.title(f"{sucursal_llamada.nombre}")
        root.grab_set()
        root.focus()
-       #sucursal_llamada.productos = {} AWEONAOS ESTABAN BORRANDO LA WEA
+       #sucursal_llamada.productos = {} 
        def actualizar_productos():
               print("Tesot1")
               listBoxProductos.delete(0, END)
