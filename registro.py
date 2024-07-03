@@ -23,6 +23,7 @@ def set_placeholder(entry, placeholder_text):
 def procedimiento():
     from Main import admin
     from Main import guardar
+    from Main import validate_command
 
     def confirmar_contraseña():
         password = contraseña_textbox.get()
@@ -58,7 +59,9 @@ def procedimiento():
 
     registro_textbox = Entry(frame, width=24, borderwidth=1, relief="solid")
     registro_textbox.grid(row=1, column=1, padx=10, pady=(0,5))
-    set_placeholder(registro_textbox, "Ingrese su nombre")
+    validate_command(registro_textbox, False)
+    #set_placeholder(registro_textbox, "Ingrese su nombre") tiene conflicto con la funcion que hace que 
+    #no se puedan colocar simbolos por los espacios asi que la deje comentada nomas
 
     label_contraseña = Label(frame, text="Contraseña", font="Helvetica 11")
     label_contraseña.grid(row=2, column=0, sticky=E, padx=10, pady=(0,5))

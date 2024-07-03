@@ -5,6 +5,7 @@ from Sucursal import Sucursal
 from string import *
 from Main import admin
 from Main import guardar
+from Main import validate_command
 import Agregar
 import Editar
 ##Cosas temporales
@@ -24,7 +25,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
               print("Test2")
               for key, producto in sucursal_llamada.productos.items():
                      print("test3")
-                     StringUnica = producto.nombre + " " + producto.id 
+                     StringUnica = producto.nombre + " @" + producto.id #agregamos el @ para hacer mas facil el split
                      lista_aux.append(str(StringUnica))
                      #Tuve que concatenarlas porque si se colocan por separado abajo cambia de tipo, pasa de ser String a tupla. Y es paja trabajar :p
               lista_aux.sort() #ordenamos la lista
@@ -34,8 +35,10 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
               if indice:
                      i = indice[0]
                      string = listBoxProductos.get(i)
-                     producto_nombre, id_producto = string.split()
+                     producto_nombre, id_producto = string.split('@')
                      producto = sucursal_llamada.get_producto(id_producto)
+                     print(producto_nombre)
+                     print(id_producto + "split")
 
                      if producto:
                             print(f"Nombre {producto.nombre}, ID: {producto.id} Precio: {producto.precio_venta}, Stock: {producto.stock} ")
@@ -118,6 +121,7 @@ def abrir_pagina_productos(pagina_sucursales, sucursal_llamada):
        grid_busqueda.grid(row=1, column=0)
        text_box_busqueda = Entry(grid_busqueda, width=40, borderwidth=1, relief="solid")
        text_box_busqueda.grid(row=0, column=0)
+       validate_command(text_box_busqueda, True)
        boton_search = Button(grid_busqueda, text="Buscar", command=buscar_producto, bg = "lightgrey", borderwidth=1, relief="solid")
        boton_search.grid(row=0, column=1, padx= 4)
        #==========================

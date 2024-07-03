@@ -3,6 +3,8 @@ from tkinter import messagebox
 from Productos import Productos
 from Main import admin
 from Main import guardar
+from Main import validate_command
+from Main import validate_command_numerin
 
 def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, elemento_selecionado):
     ventana_Editar = Toplevel(pagina_Principal)
@@ -39,6 +41,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     textBoxNombre = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxNombre.grid(row=1, column=0)
     textBoxNombre.insert(0, producto_seleccionado.get_nombre())
+    validate_command(textBoxNombre, True)
 
     # Cantidad
     labelCantidad = Label(mallaPrincipal, text="Cantidad:")
@@ -46,6 +49,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     textBoxCantidad = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxCantidad.grid(row=1, column=1)
     textBoxCantidad.insert(0, producto_seleccionado.get_stock())
+    validate_command_numerin(textBoxCantidad)
 
     # Precio Compra
     labelPrecioCompra = Label(mallaPrincipal, text="Precio Compra:")
@@ -53,6 +57,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     textBoxPrecioCompra = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioCompra.grid(row=3, column=0)
     textBoxPrecioCompra.insert(0, producto_seleccionado.get_precio_compra())
+    validate_command_numerin(textBoxPrecioCompra)
 
     # Precio Venta
     labelPrecioVenta = Label(mallaPrincipal, text="Precio Venta:")
@@ -60,6 +65,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     textBoxPrecioVenta = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioVenta.grid(row=3, column=1)
     textBoxPrecioVenta.insert(0, producto_seleccionado.get_precio_venta())
+    validate_command_numerin(textBoxPrecioVenta)
 
     malla_botones = Frame(ventana_Editar, bd=8)
     malla_botones.pack()

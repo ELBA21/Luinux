@@ -1,6 +1,8 @@
 from tkinter import *
 from Main import admin
 from Main import guardar
+from Main import validate_command
+from Main import validate_command_numerin
 
 def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):   
     agregar = Toplevel(principalProductos)
@@ -24,24 +26,28 @@ def abrirAgregar(principalProductos, surcursal_provisoria, listBoxProductos):
     labelNombre.grid(row=0, column=0)
     textBoxNombre = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxNombre.grid(row=1, column=0)
+    validate_command(textBoxNombre, True)
 
     #Cantidad
     labelCantidad = Label(mallaPrincipal, text="Cantidad:")
     labelCantidad.grid(row=0, column=1)
     textBoxCantidad = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxCantidad.grid(row=1, column=1)
+    validate_command_numerin(textBoxCantidad)
 
     #Agregar Precio Compra
     labelPrecioCompra = Label(mallaPrincipal, text="Precio compra:")
     labelPrecioCompra.grid(row=2, column=0)
     textBoxPrecioCompra = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioCompra.grid(row=3, column=0)
+    validate_command_numerin(textBoxPrecioCompra)
 
     #Agregar Precio Venta
     labelPrecioVenta = Label(mallaPrincipal, text="Precio venta:")
     labelPrecioVenta.grid(row=2, column=1)
     textBoxPrecioVenta = Entry(mallaPrincipal, borderwidth=1, relief="solid")
     textBoxPrecioVenta.grid(row=3, column=1)
+    validate_command_numerin(textBoxPrecioVenta)
 
     def agregarProductos():
         print("Boton Agregar")

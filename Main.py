@@ -6,6 +6,7 @@ from Sucursal import *
 from Productos import *
 import json
 import registro
+from functools import partial
 
 def guardar(admin):
     admin_dict = admin.to_dict()
@@ -58,6 +59,27 @@ def set_placeholder(entry, placeholder_text):
     entry.bind("<FocusIn>", on_focus_in)
     entry.bind("<FocusOut>", on_focus_out)
 
+def ischarok(string, space): #funcion que bloquea los simbolos en las entradas
+    if space:                #esta funcion es una de piton
+        return string.isalnum() or string.isspace()
+    else:
+        return string.isalnum()
+
+def validate_command(entry, space):
+    vcmd = (entry.register(partial(ischarok, space=space)), '%S') #el '%S' es el caracter que se esta intentando ingresar
+    entry.config(validate='key', validatecommand=vcmd) #cambiamos la config del entry para que solo acepte los chars que queremos
+    #ocupamos partial de functools para pasar el booleano a la funcion y decidir si queremos espacios o no
+def isnumok(int):
+    if int in "1234567890": #hacemos lo mismo pero con numeros para los precios
+        return True
+    else:
+        print("hola andres")
+        return False
+
+def validate_command_numerin(entry):
+    vcmd = (entry.register(isnumok), '%S')
+    entry.config(validate='key', validatecommand=vcmd)
+    #hola andres
 def procedimiento():
     def usuario():
         return usuario_textbox.get()
@@ -103,7 +125,8 @@ def procedimiento():
 
     usuario_textbox = Entry(frame2_usuarios, width=24, borderwidth=1, relief="solid")
     usuario_textbox.pack(pady=(0,5))
-    set_placeholder(usuario_textbox, "Ingrese su usuario")
+    validate_command(usuario_textbox, False)
+    #set_placeholder(usuario_textbox, "Ingrese su usuario")
 
     lbl_password = Label(frame2_usuarios, text="Contraseña", font="Helvetica 11")
     lbl_password.pack()

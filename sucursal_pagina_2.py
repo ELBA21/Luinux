@@ -5,7 +5,7 @@ import paginaProductos
 
 from Main import admin
 from Main import guardar
-
+from Main import validate_command
 
 
 def abrir_usuario(nombre,pagina_superior):
@@ -75,6 +75,7 @@ def abrir_usuario(nombre,pagina_superior):
             label_modificar.pack(pady=10)
             entry_modificar = Entry(frame1_modificar, borderwidth=1, relief="solid")
             entry_modificar.pack(pady=10)
+            validate_command(entry_modificar, True)
             nombre_antiguo = sucursal_seleccionada.get_nombre()
             
             def guardar_cambios(event=None):
@@ -113,6 +114,7 @@ def abrir_usuario(nombre,pagina_superior):
         label2_agregar = Label(frame2_agregar, text= "Nombre").grid(row=0, column=0, pady=10)
         nombre_sucursal = Entry(frame2_agregar, borderwidth=1, relief="solid")
         nombre_sucursal.grid(row=0, column=1, pady=10)
+        validate_command(nombre_sucursal, True)
         def cerrar_agregar():
             print("Se cierra agregar_sucursal")
             top1.destroy()
@@ -190,6 +192,7 @@ def abrir_usuario(nombre,pagina_superior):
     buscar_sucursal.bind('<FocusOut>', onFocusOut)
     buscar_sucursal.config(fg='grey')
     buscar_sucursal.grid(row=0, column=0)
+    validate_command(buscar_sucursal, True)
     buscar_boton = Button(buscar_grid, text="Buscar", command=buscar_sucursal_func, padx=5, bg="lightgrey", borderwidth=1, relief="solid")
     buscar_boton.grid(row=0, column=1)
     #======================================================
