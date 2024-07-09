@@ -11,7 +11,7 @@ from Main import validate_command
 def abrir_usuario(nombre,pagina_superior):
     usuario = admin.getUsuario(nombre)
     def abrir_sucursal():
-        if selec_sucursal == None:
+        if selec_sucursal() == None:
             messagebox.showerror("Error", "No se ha seleccionado nada")
             print("No se ha selccionado nada")
         else:
