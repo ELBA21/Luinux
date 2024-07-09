@@ -1,4 +1,4 @@
-from Productos import Productos
+from Producto import Producto
 from tkinter import *
 
 class Sucursal:
@@ -16,7 +16,7 @@ class Sucursal:
         self.productos = productos
 
     def agregar_productos(self, nombre_producto, precio_venta, precio_compra, stock_producto, override):
-        id = Productos.generar_id(nombre_producto)
+        id = Producto.generar_id(nombre_producto)
         print(id)
         x = False
         for _, producto in self.productos.items(): #este for es para que no se cree un segundo objeto con el mismo nombre 
@@ -34,7 +34,7 @@ class Sucursal:
                 break
         if x == False: # si x sigue siendo false se creara un objeto
             print("Producto nuevo")
-            self.productos[id] = Productos(nombre_producto, id, precio_venta, precio_compra, stock_producto)
+            self.productos[id] = Producto(nombre_producto, id, precio_venta, precio_compra, stock_producto)
             
 
     def eliminar_producto(self, id):

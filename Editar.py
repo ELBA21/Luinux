@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Productos import Productos
+from Producto import Producto
 from Main import admin
 from Main import guardar
 from Main import validate_command
@@ -21,7 +21,7 @@ def abrir_Editar(pagina_Principal, surcursal_provisoria, listBoxProductos, eleme
     def guardarCambios():
         print("guardar cambios")
         nombre = textBoxNombre.get()
-        id = Productos.generar_id(nombre)
+        id = Producto.generar_id(nombre)
         stock = textBoxCantidad.get()
         precio_venta = textBoxPrecioVenta.get()
         precio_compra = textBoxPrecioCompra.get()

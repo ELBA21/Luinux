@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Productos import Productos
+from Producto import Producto
 from Sucursal import Sucursal
 from string import *
 from Main import admin

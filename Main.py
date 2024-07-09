@@ -3,7 +3,7 @@ from tkinter import *
 from Administrador import *
 from Usuario import *
 from Sucursal import *
-from Productos import *
+from Producto import *
 import json
 import registro
 from functools import partial
@@ -25,7 +25,7 @@ def cargar(admin, datos):
             print("cargando " + sucursal.get_nombre() + ".bsp")#referencias al mapping de source
             productos = {}
             for _, producto_dic in sucursal_dic["productos"].items():
-                producto = Productos.from_dict(producto_dic)
+                producto = Producto.from_dict(producto_dic)
                 print("cargando " + producto.get_nombre() + ".vmt")
                 productos[producto.get_id()] = producto
             print("productos en" + sucursal.get_nombre() + " " + str(len(productos)))

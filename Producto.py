@@ -1,7 +1,7 @@
 import random
 import string
 
-class Productos:
+class Producto:
     def __init__(self, nombre, id, precio_venta, precio_compra, stock):
         self.nombre = nombre
         self.id = id
@@ -55,5 +55,5 @@ class Productos:
         return {'nombre': self.nombre, "id": self.id,'precio_venta': self.precio_venta,'precio_compra': self.precio_compra, "stock": self.stock}
     
     def from_dict(dict):
-        return Productos(dict["nombre"], dict["id"], dict["precio_venta"], dict["precio_compra"], dict["stock"])
+        return Producto(dict["nombre"], dict["id"], dict["precio_venta"], dict["precio_compra"], dict["stock"])
     
